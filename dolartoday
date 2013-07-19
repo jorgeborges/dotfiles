@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+require 'open-uri'
+require 'nokogiri'
+
+doc = Nokogiri::HTML(open('http://dolartoday.com/'))
+doc.css("//meta[@name='description']/@content").each do |tag|
+  puts tag.content.match(/BsF.\s(.{5})/).captures.first
+end
