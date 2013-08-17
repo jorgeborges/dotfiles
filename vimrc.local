@@ -1,0 +1,33 @@
+colorscheme solarized
+
+"autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+"autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+"autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+au FileType ruby,eruby setl sw=2 sts=2 et
+
+" Rspec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
+let g:rspec_command = "!rspec {spec} --color --format doc"
+
+" Buffers - explore/next/previous: Alt-F12, F12, Shift-F12.
+nnoremap <silent> <M-F12> :ls<CR>
+nnoremap <silent> <F12> :bn<CR>
+nnoremap <silent> <S-F12> :bp<CR>
+
+" GVim Big Font Fix
+if has('gui_running')
+  set guifont=Inconsolata\ Medium\ 10
+endif
+
+" Filename search in CtrlP
+let g:ctrlp_by_filename = 1
+
+" Highlights the background in a subtle red for text that goes over the 80 column limit
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+
+:set wrap

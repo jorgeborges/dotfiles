@@ -1,0 +1,5 @@
+Bundle 'henrik/vim-ruby-runner'
+Bundle 'bronson/vim-trailing-whitespace'
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'thoughtbot/vim-rspec'
+Bundle 'terryma/vim-multiple-cursors'
