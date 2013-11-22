@@ -31,4 +31,5 @@ let g:ctrlp_by_filename = 1
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
 
+" Line wrap
 :set wrap
