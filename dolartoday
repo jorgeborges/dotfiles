@@ -8,7 +8,6 @@ redis = Redis.new
 cache_price = redis.get 'dolartoday_price'
 
 if cache_price.nil?
-  #doc = open('http://dolartoday.r.worldssl.net/custom/rate.js').read
   doc = open('http://ehi5mkclj24snjkmsqex.r.worldssl.net/custom/rate.js').read
   current_price = doc.match(/"dolartoday":(.{5})/).captures.first
   redis.set 'dolartoday_price', current_price
