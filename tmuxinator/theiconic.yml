@@ -1,0 +1,21 @@
+# ~/.tmuxinator/theiconic.yml
+
+name: theiconic
+root: ~/Sites/shop
+
+windows:
+  - console:
+      layout: da75,202x50,0,0{110x50,0,0,10,91x50,111,0,16}
+      panes:
+        - clear && git status
+        - t stream timeline
+  - solr: cd ~/Sites/shop/solr/jetty && java -jar start.jar
+  - compass: cd ~/Sites/shop/alice/public && compass watch
+  - m.queues:
+      layout: 4825,202x50,0,0{90x50,0,0,13,111x50,91,0[111x24,91,0,17,111x25,91,25,18]}
+      panes:
+        - APPLICATION_ENV=dev VVERBOSE=1 QUEUE=bob-dev APP_INCLUDE=bob/cli/bootstrap.php php composer/chrisboulton/php-resque/resque.php
+        - APPLICATION_ENV=dev VVERBOSE=1 QUEUE=alice-dev APP_INCLUDE=alice/resque_bootstrap.php php composer/chrisboulton/php-resque/resque.php
+        - APPLICATION_ENV=dev VVERBOSE=1 QUEUE=solr-dev APP_INCLUDE=bob/cli/bootstrap.php php composer/chrisboulton/php-resque/resque.php
+  - alice.log: tail -f alice/tmp/borges-debug.log
+  - bob.log: tail -f bob/data/logs/borges-debug.log
