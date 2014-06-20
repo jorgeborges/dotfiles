@@ -10,7 +10,7 @@ windows:
         - clear && git status
         - t stream timeline
   - solr: cd ~/Sites/shop/solr/jetty && java -jar start.jar
-  - compass: cd ~/Sites/shop/alice/public && compass watch
+  - assets: composer/bin/phing global-build
   - m.queues:
       layout: 4825,202x50,0,0{90x50,0,0,13,111x50,91,0[111x24,91,0,17,111x25,91,25,18]}
       panes:
