@@ -33,3 +33,6 @@ match OverLength /\%81v.\+/
 
 " Line wrap
 :set wrap
+
+" Toggle paste mode
+set pastetoggle=<F10>
