@@ -4,5 +4,7 @@ track_info = `osascript -e 'tell application "iTunes" to get {name, artist} of c
 
 if $?.success?
   puts '♪ ' + track_info.chomp.gsub(/,/, ' -')
+else
+  puts '♪  music_display() ♫'
 end
 
