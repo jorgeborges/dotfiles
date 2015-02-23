@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+# Just grabs the current iTunes song information
+
 track_info = `osascript -e 'tell application "iTunes" to get {name, artist} of current track'`
 
 if $?.success?
