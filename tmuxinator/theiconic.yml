@@ -6,6 +6,6 @@ root: ~/Sites/shop
 windows:
   - console: clear && git status
   - solr: cd ~/Sites/shop/solr/jetty && java -jar start.jar
-  - assets: composer/bin/phing global-build
+  - assets: composer/bin/phing -f dev.xml global-build
   - alice.log: tail -f alice/tmp/borges-debug.log
   - bob.log: tail -f bob/data/logs/borges-debug.log
