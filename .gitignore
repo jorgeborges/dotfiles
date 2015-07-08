@@ -1,2 +1,4 @@
 *.log
+
+# config files
 todoist.yml
