@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+if tmux list-panes -F '#F' | grep -q Z ; then echo "[Z] "; fi
