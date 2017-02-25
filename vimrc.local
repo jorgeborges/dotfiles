@@ -1,5 +1,6 @@
-""set background=dark
-"colorscheme solarized
+" colors
+let g:solarized_termcolors=16
+color solarized
 
 "autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 "autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
@@ -7,12 +8,11 @@
 au FileType ruby,eruby setl sw=2 sts=2 et
 
 " Rspec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-
-let g:rspec_command = "!rspec {spec} --color --format doc"
+"map <Leader>t :call RunCurrentSpecFile()<CR>
+"map <Leader>s :call RunNearestSpec()<CR>
+"map <Leader>l :call RunLastSpec()<CR>
+"map <Leader>a :call RunAllSpecs()<CR>
+"let g:rspec_command = "!rspec {spec} --color --format doc"
 
 " Buffers - explore/next/previous: Alt-F12, F12, Shift-F12.
 nnoremap <silent> <M-F12> :ls<CR>
