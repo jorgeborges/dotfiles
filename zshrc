@@ -136,10 +136,10 @@ export PATH="/usr/local/share/python:$PATH"
 #export SBT_OPTS=-XX:MaxPermSize=512M
 
 # Docker
-#alias b2d=boot2docker
-#export DOCKER_HOST=tcp://192.168.59.103:2376
-#export DOCKER_CERT_PATH=/Users/jorgeborges/.boot2docker/certs/boot2docker-vm
-#export DOCKER_TLS_VERIFY=1
+export DOCKER_TLS_VERIFY="1"
+export DOCKER_HOST="tcp://192.168.99.100:2376"
+export DOCKER_CERT_PATH="/Users/gborges/.docker/machine/machines/default"
+export DOCKER_MACHINE_NAME="default"
 
 # Node (NVM) and NPM
 export NVM_DIR="$HOME/.nvm"
