@@ -171,5 +171,19 @@ export PATH="$PATH:$HOME/.composer/vendor/bin"
 # nginx command line
 alias nginx.restart="sudo nginx -s stop && sudo nginx"
 
+# set locale
+export LC_ALL="en_AU.UTF-8"
+
+# SK aliases
+alias sksu="php -d memory_limit=-1 public/index.php etl update_stats scope_operational -v"
+alias sksbu="php -d memory_limit=-1 public/index.php etl update_stats scope_business -v"
+alias skcu="php -d memory_limit=-1 public/index.php etl update_catalog import_active scope_operational -v"
+alias skcum="php -d memory_limit=-1 public/index.php etl update_catalog import_messages scope_operational -v"
+alias skcbu="php -d memory_limit=-1 public/index.php etl update_catalog import_active scope_business -v"
+alias skcbum="php -d memory_limit=-1 public/index.php etl update_catalog import_messages scope_business -v"
+alias sks="php -d memory_limit=-1 public/index.php etl snapshot import_active scope_business -v"
+alias skw="php -d memory_limit=-1 public/index.php etl update_wishlist import_active scope_global -v"
+alias sktbr="php -d memory_limit=-1 public/index.php etl update_catalog_timeline import_active scope_business --with-recreate-index -v"
+
 # iterm2 shell integration (disable for now because of tmux)
 #test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
