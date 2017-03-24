@@ -118,7 +118,7 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export PATH="$(brew --prefix mysql@5.6)/bin:$PATH"
 
 # PHP 7
-export PATH="$(brew --prefix php70)/bin:$PATH"
+export PATH="$(brew --prefix php71)/bin:$PATH"
 
 # Android
 #export ANDROID_HOME=/Users/jorgeborges/adt-bundle-mac-x86_64-20131030/sdk
