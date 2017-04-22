@@ -187,3 +187,7 @@ alias sktbr="php -d memory_limit=-1 public/index.php etl update_catalog_timeline
 
 # iterm2 shell integration (disable for now because of tmux)
 #test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# add my keys to SSH
+ssh-add -K ~/.ssh/id_rsa_jborges82 &>/dev/null
+ssh-add -K ~/.ssh/id_rsa_theiconic &>/dev/null
