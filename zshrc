@@ -7,8 +7,6 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="jborges"
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Set to this to use case-sensitive completion
@@ -49,6 +47,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/sbin:/usr/sbin:$PATH
 
 # Aliases
+alias zshconfig="vim ~/.zshrc"
 ## Use a long listing format ##
 alias ll='ls -lah'
 ## Show hidden files ##
