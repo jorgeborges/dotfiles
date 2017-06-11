@@ -1,1 +1,2 @@
 Bundle 'bronson/vim-trailing-whitespace'
+Bundle 'junegunn/vim-emoji'
