@@ -40,3 +40,8 @@ set pastetoggle=<F10>
 
 " emoji autocomplete for git commit messages
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG set completefunc=emoji#complete
+
+" start on first line when editing git commit
+au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+au FileType gitcommit au! BufEnter PULLREQ_EDITMSG call setpos('.', [0, 1, 1, 0])
+
