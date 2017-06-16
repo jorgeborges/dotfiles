@@ -5,12 +5,12 @@ root: ~/
 
 windows:
   - console: cd && clear
-  - solr: cd ~/Sites/shop/solr/jetty && java -jar start.jar
+  - solr: solr restart -f
   - shop:
       layout: even-horizontal
       panes:
-          - cd ~/Sites/alice && clear
-          - cd ~/Sites/bob && clear
+          - cd ~/repos_theiconic/alice && clear
+          - cd ~/repos_theiconic/bob && clear
   #- assets: composer/bin/phing -f dev.xml global-build
   #- alice.log: tail -f alice/tmp/borges-debug.log
   #- bob.log: tail -f bob/data/logs/borges-debug.log
