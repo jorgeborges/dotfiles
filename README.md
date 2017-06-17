@@ -31,4 +31,4 @@ Displays the current track being played by Spotify. Also goes on my tmux status 
 
 ---
 
-*"Everyday life is like programming, I guess. If you love something you can put beauty into it."*- Donald Knuth
+*"Everyday life is like programming, I guess. If you love something you can put beauty into it."* - Donald Knuth
