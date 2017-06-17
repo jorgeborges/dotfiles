@@ -16,7 +16,7 @@ if price.nil?
                             accept: 'application/json'
   case response.code
     when 200
-      market = JSON.parse(response)
+      market = JSON.parse response
       price = market['lastPrice']
       redis.set ETH_PRICE_KEY, price, ex: (60 * CACHE_EXPIRE_MINUTES)
     else

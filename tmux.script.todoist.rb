@@ -32,7 +32,7 @@ if response.nil?
   redis.set TODOIST_KEY, response, ex: (60 * CACHE_EXPIRE_MINUTES)
 end
 
-todoist = JSON.parse(response)
+todoist = JSON.parse response
 
 overdue = today = future = icebox = 0
 todoist['items'].each do |item|
