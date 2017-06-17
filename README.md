@@ -21,13 +21,13 @@ Goes on my tmux status bar.
 
 ![ETH/AUD Price](https://github.com/jorgeborges/dotfiles/blob/master/assets/img/btcmarkets_eth_to_aud.png)
 
-Displays the current price in AUD for 1 ether in [BTC Markets](https://www.btcmarkets.net/). Placed on my tmux status bar.
+Displays the current price in AUD for 1 Ether in [BTC Markets](https://www.btcmarkets.net/). Placed on my tmux status bar.
 
 ### Spotify current track
 
 ![Spotify current track](https://github.com/jorgeborges/dotfiles/blob/master/assets/img/spotify.png)
 
-Displays the current price track being played by Spotify. Placed on my tmux status bar.
+Displays the current track being played by Spotify. Also goes on my tmux status bar.
 
 ---
 
