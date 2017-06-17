@@ -5,11 +5,11 @@ require 'open-uri'
 require 'redis'
 require 'json'
 
+ETH_PRICE_KEY = 'eth_aud_price'
 CACHE_EXPIRE_MINUTES = 15
 
 redis = Redis.new
-
-cache_price = redis.get 'eth_aud_price'
+cache_price = redis.get ETH_PRICE_KEY
 
 if cache_price.nil?
   response = RestClient.get 'https://api.btcmarkets.net/market/ETH/AUD/tick',
@@ -18,11 +18,10 @@ if cache_price.nil?
     when 200
       market = JSON.parse(response)
       current_price = market['lastPrice']
-      redis.set 'eth_aud_price', current_price, ex: (60 * CACHE_EXPIRE_MINUTES)
+      redis.set ETH_PRICE_KEY, current_price, ex: (60 * CACHE_EXPIRE_MINUTES)
     else
       current_price = 'ERROR!'
   end
-
 else
   current_price = cache_price
 end
