@@ -16,9 +16,9 @@ CACHE_EXPIRE_MINUTES = 10
 config = YAML.load_file(__dir__ + '/config/todoist.yml')
 
 redis = Redis.new
-cache_response = redis.get TODOIST_KEY
+response = redis.get TODOIST_KEY
 
-if cache_response.nil?
+if response.nil?
   begin
     response = RestClient.post 'https://todoist.com/API/v7/sync', {token: config['api_token'], sync_token: '*', resource_types: '["all"]'}
   rescue
@@ -29,10 +29,7 @@ if cache_response.nil?
     end
     Kernel.abort
   end
-  redis.set TODOIST_KEY, response
-  redis.expire TODOIST_KEY, (60 * CACHE_EXPIRE_MINUTES)
-else
-  response = cache_response
+  redis.set TODOIST_KEY, response, ex: (60 * CACHE_EXPIRE_MINUTES)
 end
 
 todoist = JSON.parse(response)
