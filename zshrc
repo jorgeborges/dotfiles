@@ -39,12 +39,12 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 #plugins=(git heroku rails ruby tmux tmuxinator golang docker vagrant zsh-syntax-highlighting history-substring-search lein)
-plugins=(git heroku rails ruby docker tmux history-substring-search zsh-syntax-highlighting)
+plugins=(git ruby docker tmux history-substring-search zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/sbin:/usr/sbin:$PATH
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/sbin:/usr/sbin
 
 # Aliases
 alias zshconfig="vim ~/.zshrc"
@@ -72,8 +72,6 @@ alias dops="docker ps -a"
 alias dcom="docker-compose"
 ## Vagrant
 alias v="vagrant"
-## Git
-#alias ggpush="git push origin $(git rev-parse --abbrev-ref HEAD)"
 
 # Fix for tmux colors
 alias tmux="TERM=screen-256color-bce tmux"
@@ -104,23 +102,19 @@ bindkey '^[[B' history-substring-search-down
 stty -ixon -ixoff
 
 # rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+if which rbenv > /dev/null; then eval "$(rbenv init - --no-rehash)"; fi
 
 # Tmux
 [ -z "$TMUX" ] && export TERM=xterm-256color
 
 # MySQL 5.6
-export PATH="$(brew --prefix mysql@5.6)/bin:$PATH"
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 
 # PHP 7
-export PATH="$(brew --prefix php71)/bin:$PATH"
-
-# Android
-#export ANDROID_HOME=/Users/jorgeborges/adt-bundle-mac-x86_64-20131030/sdk
-#export PATH=$PATH:~/adt-bundle-mac-x86_64-20131030/sdk/platform-tools:~/adt-bundle-mac-x86_64-20131030/sdk/tools
+export PATH="/usr/local/opt/php71/bin:$PATH"
 
 # Python
-export PATH="/usr/local/share/python:$PATH"
+#export PATH="/usr/local/share/python:$PATH"
 
 # Go
 #export GOPATH=$HOME/go:$HOME/Repositories/lang-playground/go
@@ -138,7 +132,9 @@ export DOCKER_MACHINE_NAME="default"
 
 # Node (NVM) and NPM
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh"  ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+export PATH=~/.nvm/versions/node/v6.10.0/bin:$PATH
+#[ -s "$NVM_DIR/nvm.sh"  ] && . "$NVM_DIR/nvm.sh" # This loads nvm (slow)
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # AWS CLI
 #source /usr/local/bin/aws_zsh_completer.sh
@@ -158,7 +154,7 @@ function gstash() {
 }
 
 # added by travis gem
-[ -f /Users/jorgeborges/.travis/travis.sh ] && source /Users/jorgeborges/.travis/travis.sh
+#[ -f /Users/jorgeborges/.travis/travis.sh ] && source /Users/jorgeborges/.travis/travis.sh
 
 # composer binaries
 export PATH="$PATH:$HOME/.composer/vendor/bin"
