@@ -6,7 +6,7 @@ require 'redis'
 require 'json'
 
 ETH_PRICE_KEY = 'eth_aud_price'
-CACHE_EXPIRE_MINUTES = 15
+CACHE_EXPIRE_MINUTES = 5
 
 redis = Redis.new
 price = redis.get ETH_PRICE_KEY
