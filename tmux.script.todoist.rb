@@ -11,7 +11,7 @@ require 'date'
 require 'yaml'
 
 TODOIST_KEY = 'todoist'
-CACHE_EXPIRE_MINUTES = 10
+CACHE_EXPIRE_MINUTES = 5
 
 config = YAML.load_file(__dir__ + '/config/todoist.yml')
 
