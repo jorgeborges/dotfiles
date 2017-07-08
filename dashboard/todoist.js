@@ -85,8 +85,8 @@ class Todoist {
 
     let items = data.items
       .filter(item =>
-      Date.parse(item.due_date_utc) >= (new Date()).setHours(0, 0, 0, 0)
-      && Date.parse(item.due_date_utc) < (new Date()).setHours(23, 59, 59))
+        Date.parse(item.due_date_utc) >= (new Date()).setHours(0, 0, 0, 0)
+        && Date.parse(item.due_date_utc) < (new Date()).setHours(23, 59, 59))
       .map(item =>
         [
           `◘ ${item.content}`,
