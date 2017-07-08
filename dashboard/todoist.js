@@ -1,13 +1,13 @@
 const request = require('request');
 const contrib = require('blessed-contrib');
-const NodeCache = require('node-cache');
+const cache = require('memory-cache');
 
 class Todoist {
   constructor(config) {
     this._config = config;
 
     this._cacheKey = 'todoist';
-    this._cache = new NodeCache({ stdTTL: 60, checkperiod: 90 });
+    this._cache = cache;
 
     this._headers = ['Description', 'Labels'];
     this._setData([['Awaiting data...', '']]);
@@ -47,7 +47,7 @@ class Todoist {
   _getData() {
     const todoistData = this._cache.get(this._cacheKey);
 
-    if (todoistData === undefined) {
+    if (todoistData === null) {
       const formData = {
         token: this._config.todoist.api_token,
         sync_token: '*',
@@ -63,7 +63,7 @@ class Todoist {
           }
 
           if (httpResponse.statusCode === 200) {
-            this._cache.set(this._cacheKey, JSON.parse(body));
+            this._cache.put(this._cacheKey, JSON.parse(body), 1000 * this._config.todoist.cache_in_seconds);
           }
         });
     } else {
