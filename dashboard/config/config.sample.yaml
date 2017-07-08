@@ -2,3 +2,4 @@
 default:
   todoist:
     api_token: %MY_TODOIST_API_TOKEN%
+    cache_in_seconds: 60
