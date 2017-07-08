@@ -1,18 +1,18 @@
 const request = require('request');
 const contrib = require('blessed-contrib');
+const NodeCache = require('node-cache');
 
 class Todoist {
   constructor(config) {
+    this._cacheKey = 'todoist';
+
     this._config = config;
+
+    this._cache = new NodeCache({ stdTTL: 60, checkperiod: 90 });
 
     this._headers = ['Description', 'Labels'];
 
-    this._data = {
-      headers: this._headers,
-      data: [
-        ['Awaiting data...', ''],
-      ],
-    };
+    this._setData([['Awaiting data...', '']]);
 
     this._widgetType = contrib.table;
 
@@ -42,51 +42,79 @@ class Todoist {
     return this._data;
   }
 
+  /**
+   * Gets the Todoist data from either cache or the API.
+   *
+   * @private
+   */
   _getData() {
-    const formData = {
-      token: this._config.todoist.api_token,
-      sync_token: '*',
-      resource_types: '["all"]',
+    const todoistData = this._cache.get(this._cacheKey);
+
+    if (todoistData === undefined) {
+      const formData = {
+        token: this._config.todoist.api_token,
+        sync_token: '*',
+        resource_types: '["items", "labels"]',
+      };
+
+      request
+        .post({url: 'https://todoist.com/API/v7/sync', formData }, (err, httpResponse, body) => {
+          if (err) {
+            this._setData([['ERROR!', '']]);
+
+            return;
+          }
+
+          if (httpResponse.statusCode === 200) {
+            this._cache.set(this._cacheKey, JSON.parse(body));
+          }
+        });
+    } else {
+      const items = this._parseTodoistData(todoistData);
+      this._setData(items);
+    }
+  }
+
+  /**
+   * Arranges the Todoist data in items to be displayed.
+   *
+   * @param data
+   * @returns {Array|*}
+   * @private
+   */
+  _parseTodoistData(data) {
+    const labels = new Map();
+    data.labels.forEach(label => labels.set(label.id, label.name));
+
+    let items = data.items
+      .filter(item =>
+      Date.parse(item.due_date_utc) >= (new Date()).setHours(0, 0, 0, 0)
+      && Date.parse(item.due_date_utc) < (new Date()).setHours(23, 59, 59))
+      .map(item =>
+        [
+          item.content,
+          item.labels.sort().reduce((allLabels, labelId) => `${allLabels} ${labels.get(labelId)}`, ''),
+        ]
+      );
+
+    if (items.length === 0) {
+      items = [['No more items for today!', '']];
+    }
+
+    return items;
+  }
+
+  /**
+   * Updates the data to be displayed by the widget.
+   *
+   * @param items
+   * @private
+   */
+  _setData(items) {
+    this._data = {
+      headers: this._headers,
+      data: items,
     };
-
-    request
-      .post({url: 'https://todoist.com/API/v7/sync', formData }, (err, httpResponse, body) => {
-        if (err) {
-          this._data = {
-            headers: this._headers,
-            data: [
-              ['ERROR!', ''],
-            ],
-          };
-
-          return;
-        }
-
-        const data = JSON.parse(body);
-
-        let items = [['No more items for today!', '']];
-
-        if (httpResponse.statusCode === 200) {
-          const labels = new Map();
-          data.labels.forEach(label => labels.set(label.id, label.name));
-
-          items = data.items
-            .filter(item =>
-              Date.parse(item.due_date_utc) >= (new Date()).setHours(0, 0, 0, 0)
-              && Date.parse(item.due_date_utc) < (new Date()).setHours(23, 59, 59))
-            .map(item =>
-              [
-                item.content,
-                item.labels.sort().reduce((allLabels, labelId) => `${allLabels} ${labels.get(labelId)}`, ''),
-              ]
-            );
-        }
-
-        this._data = {
-          headers: this._headers,
-          data: items,
-        };
-      });
   }
 }
 
