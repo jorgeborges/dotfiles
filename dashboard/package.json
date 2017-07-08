@@ -5,7 +5,8 @@
   "main": "dashboard.js",
   "dependencies": {
     "blessed": "^0.1.81",
-    "blessed-contrib": "^4.7.5"
+    "blessed-contrib": "^4.7.5",
+    "request": "^2.81.0"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
