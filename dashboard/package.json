@@ -4,6 +4,7 @@
   "description": "My personal dashboard",
   "main": "dashboard.js",
   "dependencies": {
+    "autobahn": "^17.5.2",
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.7.5",
     "node-cache": "^4.1.1",
