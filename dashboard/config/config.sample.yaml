@@ -1,0 +1,4 @@
+# copy to config.yaml
+default:
+  todoist:
+    api_token: %MY_TODOIST_API_TOKEN%
