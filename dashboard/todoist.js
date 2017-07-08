@@ -4,18 +4,15 @@ const NodeCache = require('node-cache');
 
 class Todoist {
   constructor(config) {
-    this._cacheKey = 'todoist';
-
     this._config = config;
 
+    this._cacheKey = 'todoist';
     this._cache = new NodeCache({ stdTTL: 60, checkperiod: 90 });
 
     this._headers = ['Description', 'Labels'];
-
     this._setData([['Awaiting data...', '']]);
 
     this._widgetType = contrib.table;
-
     this._widgetOptions = {
       keys: false,
       interactive: false,
