@@ -6,7 +6,7 @@
   "dependencies": {
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.7.5",
-    "memory-cache": "^0.2.0",
+    "node-cache": "^4.1.1",
     "node-yaml-config": "0.0.4",
     "request": "^2.81.0"
   },
