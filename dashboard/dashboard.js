@@ -1,30 +1,76 @@
+const path = require('path');
 const blessed = require('blessed');
-
 const contrib = require('blessed-contrib');
+const Todoist = require(path.resolve(__dirname, 'todoist.js'));
 
+// init grid
 const screen = blessed.screen();
-const grid = new contrib.grid({ rows: 1, cols: 2, screen });
+const grid = new contrib.grid({ rows: 6, cols: 8, screen });
 
-const line = grid.set(0, 0, 1, 1, contrib.line, {
-  style: {
-    line: 'yellow',
-    text: 'green',
-    baseline: 'black',
-  },
-  xLabelPadding: 3,
-  xPadding: 5,
-  label: 'Stocks',
+// Place Grid Panels
+// Tasks
+const todoist = new Todoist();
+const tasks = grid.set(0, 0, 3, 3, todoist.widgetType, todoist.widgetOptions);
+
+// THE ICONIC GA Real Time
+grid.set(0, 3, 1, 1, blessed.box, {label: '.the iconic status'});
+
+// Github
+grid.set(0, 4, 1, 1, blessed.box, {label: '.github'});
+
+// Alarms
+grid.set(1, 3, 2, 2, blessed.box, {label: '.alarms'});
+
+// World Map
+grid.set(0, 5, 3, 3, contrib.map, {label: '.picolog status'});
+
+// Blockchain Assets
+grid.set(3, 0, 3, 3, contrib.map, { label: '.crypto-currencies' });
+
+// Email
+grid.set(3, 3, 1, 2, blessed.box, {label: '.email'});
+
+// Calendar
+grid.set(4, 3, 2, 2, blessed.box, {label: '.calendar'});
+
+// Quote
+grid.set(3, 5, 1, 3, blessed.box, {label: '.info'});
+
+// Pomodoro
+const pomodoro = grid.set(4, 5, 2, 2, contrib.donut, {
+  label: '.pomodoro',
+  radius: 24,
+  arcWidth: 6,
+  remainColor: 'black',
+  yPadding: 2,
+  data: [
+    {percent: 0, label: 'work!', color: 'red'}
+  ]
 });
 
-const map = grid.set(0, 1, 1, 1, contrib.map, { label: 'Servers Location' });
+let pct = 0.00;
 
-const lineData = {
-  x: ['t1', 't2', 't3', 't4'],
-  y: [5, 1, 7, 5],
-};
+function updateDonut(){
+  if (pct > 0.99) pct = 0.00;
+  let color = "green";
+  if (pct >= 0.25) color = "cyan";
+  if (pct >= 0.5) color = "yellow";
+  if (pct >= 0.75) color = "red";
+  pomodoro.setData([
+    {percent: parseFloat((pct+0.00) % 1).toFixed(2), label: 'work!', 'color': color}
+  ]);
+  pct += 0.01;
+}
 
-line.setData([lineData]);
+// Time For
+grid.set(4, 7, 2, 1, blessed.box, {label: '.time_for'});
+
+// refresh dashboard
+setInterval(() => {
+  tasks.setData(todoist.tick());
+  updateDonut();
+  screen.render();
+}, 1000);
 
 screen.key(['escape', 'q', 'C-c'], () => process.exit(0));
-
 screen.render();
