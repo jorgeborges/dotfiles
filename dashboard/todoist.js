@@ -19,7 +19,7 @@ class Todoist {
     this._widgetOptions = {
       keys: false,
       interactive: false,
-      label: '.today tasks',
+      label: '.tasks for today',
       width: '40%',
       height: '40%',
       border: { type: 'line', fg: 'cyan' },
