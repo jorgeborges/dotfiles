@@ -1,6 +1,7 @@
 const path = require('path');
 const blessed = require('blessed');
 const contrib = require('blessed-contrib');
+const yamlConfig = require('node-yaml-config');
 const Todoist = require(path.resolve(__dirname, 'todoist.js'));
 
 // init grid
@@ -8,8 +9,10 @@ const screen = blessed.screen();
 const grid = new contrib.grid({ rows: 6, cols: 8, screen });
 
 // Place Grid Panels
+const config = yamlConfig.load(__dirname + '/config/config.yaml');
+
 // Tasks
-const todoist = new Todoist();
+const todoist = new Todoist(config);
 const tasks = grid.set(0, 0, 3, 3, todoist.widgetType, todoist.widgetOptions);
 
 // THE ICONIC GA Real Time
