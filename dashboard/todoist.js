@@ -89,7 +89,7 @@ class Todoist {
       && Date.parse(item.due_date_utc) < (new Date()).setHours(23, 59, 59))
       .map(item =>
         [
-          item.content,
+          `◘ ${item.content}`,
           item.labels.sort().reduce((allLabels, labelId) => `${allLabels} ${labels.get(labelId)}`, ''),
         ]
       );
