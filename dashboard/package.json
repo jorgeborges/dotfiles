@@ -6,6 +6,7 @@
   "dependencies": {
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.7.5",
+    "node-yaml-config": "0.0.4",
     "request": "^2.81.0"
   },
   "devDependencies": {
