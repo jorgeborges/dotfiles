@@ -21,7 +21,7 @@ class Todoist {
       height: '40%',
       border: { type: 'line', fg: 'cyan' },
       columnSpacing: 6, // in chars
-      columnWidth: [40, 17], // in chars
+      columnWidth: [45, 17], // in chars
     };
   }
 
