@@ -3,3 +3,5 @@ default:
   todoist:
     api_token: %MY_TODOIST_API_TOKEN%
     cache_in_seconds: 60
+  cryptocurrency:
+    coins: ['BTC', 'ETH', 'XRP', 'LTC', 'DASH', 'XMR', 'ZEC', 'ETC']

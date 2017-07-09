@@ -5,24 +5,12 @@ class Cryptocurrency {
   constructor(config) {
     this._config = config;
 
-    this._coinDiminutives = ['BTC', 'ETH', 'XRP', 'LTC', 'DASH', 'XMR', 'ZEC', 'ETC'];
+    this._coinDiminutives = config.cryptocurrency.coins;
 
     this._coinsData = new Map();
     this._coinDiminutives.forEach(coin => this._coinsData.set(coin, { price: '', change: ''}));
 
-    const wsuri = 'wss://api.poloniex.com';
-    this._connection = new autobahn.Connection({
-      url: wsuri,
-      realm: 'realm1',
-    });
-
-    this._connection.onopen = session => session.subscribe('ticker', this._tickerExchange.bind(this));
-
-    this._connection.onclose = () => {
-      console.log('Websocket connection closed');
-    };
-
-    this._connection.open();
+    this._subscribeToLiveCoinUpdates();
 
     this._headers = ['Coin', 'Price (USD)', 'Change'];
     this._setData([['Preparing some mojitos...', '', '']]);
@@ -98,6 +86,22 @@ class Cryptocurrency {
 
       this._coinsData.set(coin, { price: args[1].toString(), change: colorSuffix + change });
     }
+  }
+
+  _subscribeToLiveCoinUpdates() {
+    const wsuri = 'wss://api.poloniex.com';
+    this._connection = new autobahn.Connection({
+      url: wsuri,
+      realm: 'realm1',
+    });
+
+    this._connection.onopen = session => session.subscribe('ticker', this._tickerExchange.bind(this));
+
+    this._connection.onclose = () => {
+      console.log('Websocket connection closed');
+    };
+
+    this._connection.open();
   }
 }
 
