@@ -3,6 +3,7 @@ const blessed = require('blessed');
 const contrib = require('blessed-contrib');
 const yamlConfig = require('node-yaml-config');
 const Todoist = require(path.resolve(__dirname, 'todoist.js'));
+const Cryptocurrency = require(path.resolve(__dirname, 'cryptocurrency.js'));
 
 // init grid
 const screen = blessed.screen();
@@ -28,7 +29,8 @@ grid.set(1, 3, 2, 2, blessed.box, {label: '.alarms'});
 grid.set(0, 5, 3, 3, contrib.map, {label: '.picolog status'});
 
 // Blockchain Assets
-grid.set(3, 0, 3, 3, contrib.map, { label: '.crypto-currencies' });
+const crypto = new Cryptocurrency(config);
+const cryptoWidget = grid.set(3, 0, 3, 3, crypto.widgetType, crypto.widgetOptions);
 
 // Email
 grid.set(3, 3, 1, 2, blessed.box, {label: '.email'});
@@ -71,6 +73,7 @@ grid.set(4, 7, 2, 1, blessed.box, {label: '.time_for'});
 // refresh dashboard
 setInterval(() => {
   tasksWidget.setData(todoist.tick());
+  cryptoWidget.setData(crypto.tick());
   updateDonut();
   screen.render();
 }, 1000);
