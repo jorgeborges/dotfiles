@@ -2,15 +2,15 @@ const path = require('path');
 const blessed = require('blessed');
 const contrib = require('blessed-contrib');
 const yamlConfig = require('node-yaml-config');
-const Todoist = require(path.resolve(__dirname, 'todoist.js'));
-const Cryptocurrency = require(path.resolve(__dirname, 'cryptocurrency.js'));
+const Todoist = require(path.resolve(__dirname, 'widget/todoist.js'));
+const Cryptocurrency = require(path.resolve(__dirname, 'widget/cryptocurrency.js'));
 
 // init grid
 const screen = blessed.screen();
 const grid = new contrib.grid({ rows: 6, cols: 8, screen });
 
 // Place Grid Panels
-const config = yamlConfig.load(__dirname + '/config/config.yaml');
+const config = yamlConfig.load(path.resolve(__dirname, 'config/config.yaml'));
 
 // Tasks
 const todoist = new Todoist(config);
