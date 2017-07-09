@@ -1,19 +1,15 @@
+const path = require('path');
+const Widget = require(path.resolve(__dirname, 'widget.js'));
 const request = require('request');
 const contrib = require('blessed-contrib');
 const NodeCache = require('node-cache');
 
-class Todoist {
+/**
+ * Todoist widget, todoist is a task organization service.
+ */
+class Todoist extends Widget {
   constructor(config) {
-    this._config = config;
-
-    this._cacheKey = 'todoist';
-    this._cache = new NodeCache({ stdTTL: this._config.todoist.cache_in_seconds, checkperiod: 120 });
-
-    this._headers = ['Description', 'Labels'];
-    this._setData([['Awaiting data...', '']]);
-
-    this._widgetType = contrib.table;
-    this._widgetOptions = {
+    super(config, contrib.table, {
       keys: false,
       interactive: false,
       label: '.tasks for today',
@@ -22,21 +18,13 @@ class Todoist {
       border: { type: 'line', fg: 'cyan' },
       columnSpacing: 6, // in chars
       columnWidth: [45, 17], // in chars
-    };
-  }
+    });
 
-  get widgetType() {
-    return this._widgetType;
-  }
+    this._cacheKey = 'todoist';
+    this._cache = new NodeCache({ stdTTL: this._config.todoist.cache_in_seconds, checkperiod: 120 });
 
-  get widgetOptions() {
-    return this._widgetOptions;
-  }
-
-  tick() {
-    this._getData();
-
-    return this._data;
+    this._headers = ['Description', 'Labels'];
+    this._setData([['Awaiting data...', '']]);
   }
 
   /**

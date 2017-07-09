@@ -1,9 +1,24 @@
+const path = require('path');
+const Widget = require(path.resolve(__dirname, 'widget.js'));
 const contrib = require('blessed-contrib');
 const autobahn = require('autobahn');
 
-class Cryptocurrency {
+/**
+ * Cryptocurrency widget, get all the latest price updates from Poloniex, a crypto currency exchange.
+ */
+class Cryptocurrency extends Widget {
   constructor(config) {
-    this._config = config;
+    super(config, contrib.table, {
+      keys: false,
+      interactive: false,
+      fg: 'gray90',
+      label: '.crypto-currencies',
+      width: '40%',
+      height: '40%',
+      border: { type: 'line', fg: 'cyan' },
+      columnSpacing: 6, // in chars
+      columnWidth: [5, 15, 6], // in chars
+    });
 
     this._coinDiminutives = config.cryptocurrency.coins;
 
@@ -14,35 +29,13 @@ class Cryptocurrency {
 
     this._headers = ['Coin', 'Price (USD)', 'Change'];
     this._setData([['Preparing some mojitos...', '', '']]);
-
-    this._widgetType = contrib.table;
-    this._widgetOptions = {
-      keys: false,
-      interactive: false,
-      fg: 'gray90',
-      label: '.crypto-currencies',
-      width: '40%',
-      height: '40%',
-      border: { type: 'line', fg: 'cyan' },
-      columnSpacing: 6, // in chars
-      columnWidth: [5, 15, 6], // in chars
-    };
   }
 
-  get widgetType() {
-    return this._widgetType;
-  }
-
-  get widgetOptions() {
-    return this._widgetOptions;
-  }
-
-  tick() {
-    this._getData();
-
-    return this._data;
-  }
-
+  /**
+   * Gets the latest data for all configured coins from the Map that updates constantly.
+   *
+   * @private
+   */
   _getData() {
     const market = this._coinDiminutives.map(
       coin => [coin, this._coinsData.get(coin).price, this._coinsData.get(coin).change]
@@ -88,6 +81,11 @@ class Cryptocurrency {
     }
   }
 
+  /**
+   * Setups the whole real time updates connection by subscribing to the service and awaiting push notifications.
+   *
+   * @private
+   */
   _subscribeToLiveCoinUpdates() {
     const wsuri = 'wss://api.poloniex.com';
     this._connection = new autobahn.Connection({
