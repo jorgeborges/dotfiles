@@ -3,4 +3,5 @@ rules:
   no-console: "off"
   import/no-dynamic-require: "off"
   no-underscore-dangle: "off"
+  comma-dangle: "off"
   max-len: [1, { code: 120 }]
