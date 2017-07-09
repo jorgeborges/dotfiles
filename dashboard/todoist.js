@@ -84,7 +84,7 @@ class Todoist {
     data.labels.forEach(label => labels.set(label.id, label.name));
 
     let items = data.items
-      .filter(item => Todoist._isToday(item.due_date_utc))
+      .filter(item => Todoist._isTodayOrPastdue(item.due_date_utc))
       .map(item =>
         [
           `◘ ${item.content}`,
@@ -106,9 +106,8 @@ class Todoist {
    * @returns {boolean}
    * @private
    */
-  static _isToday(dueDateUtc) {
-    return Date.parse(dueDateUtc) >= (new Date()).setHours(0, 0, 0, 0)
-      && Date.parse(dueDateUtc) < (new Date()).setHours(23, 59, 59, 999);
+  static _isTodayOrPastdue(dueDateUtc) {
+    return Date.parse(dueDateUtc) <= (new Date()).setHours(23, 59, 59, 999);
   }
 
   /**
