@@ -13,7 +13,7 @@ const config = yamlConfig.load(__dirname + '/config/config.yaml');
 
 // Tasks
 const todoist = new Todoist(config);
-const tasks = grid.set(0, 0, 3, 3, todoist.widgetType, todoist.widgetOptions);
+const tasksWidget = grid.set(0, 0, 3, 3, todoist.widgetType, todoist.widgetOptions);
 
 // THE ICONIC GA Real Time
 grid.set(0, 3, 1, 1, blessed.box, {label: '.the iconic status'});
@@ -70,7 +70,7 @@ grid.set(4, 7, 2, 1, blessed.box, {label: '.time_for'});
 
 // refresh dashboard
 setInterval(() => {
-  tasks.setData(todoist.tick());
+  tasksWidget.setData(todoist.tick());
   updateDonut();
   screen.render();
 }, 1000);
