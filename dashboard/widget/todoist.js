@@ -88,7 +88,7 @@ class Todoist extends Widget {
   }
 
   /**
-   * Indicates if the due date is today.
+   * Indicates if the due date is today or its past due.
    *
    * @param dueDateUtc
    * @returns {boolean}
