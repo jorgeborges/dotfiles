@@ -4,7 +4,6 @@
 # j9 by Jorge Borges
 
 # Use with a dark background and 256-color terminal!
-# Meant for people with RVM and git. Tested only on OS X 10.7.
 
 # You can set your computer name in the ~/.box-name file if you want.
 
