@@ -23,7 +23,7 @@ autoload -U add-zsh-hook
 function prompt_char {
     #git status >/dev/null 2>/dev/null && echo '± ' && return
     #hg root >/dev/null 2>/dev/null && echo '☿ ' && return
-    echo '❯ '
+    echo "%{$fg[red]%}❯%{$reset_color%}%{$fg[yellow]%}❯%{$reset_color%}%{$fg[cyan]%}❯%{$reset_color%} "
 }
 
 function box_name {
