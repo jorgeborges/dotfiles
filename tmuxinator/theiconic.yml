@@ -5,7 +5,7 @@ root: ~/
 
 windows:
   - console: cd && clear
-  - dashboard: LANG=en_US.utf8 TERM=xterm-256color node ~/dotfiles/dashboard/dashboard.js
+  - dashboard: LANG=en_US.utf8 TERM=xterm-256color node ~/repos/tablero/index.js
   - solr: solr restart -f
   - shop:
       layout: even-horizontal
