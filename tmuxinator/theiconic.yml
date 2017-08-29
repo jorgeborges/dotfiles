@@ -5,7 +5,7 @@ root: ~/
 
 windows:
   - console: cd && clear
-  - dashboard: LANG=en_US.utf8 TERM=xterm-256color node ~/repos/tablero/index.js
+  - dashboard: cd ~/repos/tablero && yarn start
   - solr: solr restart -f
   - shop:
       layout: even-horizontal
