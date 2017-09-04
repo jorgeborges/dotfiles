@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 #local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
-# j9 by Jorge Borges
+# Altera by Jorge Borges
 
 # Use with a dark background and 256-color terminal!
 
