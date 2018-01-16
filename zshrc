@@ -157,9 +157,6 @@ function gstash() {
     git stash show -p stash@{$1}
 }
 
-# added by travis gem
-#[ -f /Users/jorgeborges/.travis/travis.sh ] && source /Users/jorgeborges/.travis/travis.sh
-
 # composer binaries
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 
@@ -186,3 +183,7 @@ alias sktbr="php -d memory_limit=-1 public/index.php etl update_catalog_timeline
 # add my keys to SSH
 ssh-add -K ~/.ssh/id_rsa_jborges82 &>/dev/null
 ssh-add -K ~/.ssh/id_rsa_theiconic &>/dev/null
+
+# added by travis gem
+[ -f /Users/gborges/.travis/travis.sh ] && source /Users/gborges/.travis/travis.sh
+
