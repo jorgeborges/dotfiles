@@ -68,6 +68,11 @@ alias doi="docker images"
 alias dori="docker rmi"
 alias dorc="docker rm"
 alias dops="docker ps -a"
+
+function wipe_container() {
+    docker stop $1
+    docker rm $1
+}
 ## Docker Composer
 alias dcom="docker-compose"
 ## Vagrant
