@@ -187,3 +187,10 @@ ssh-add -K ~/.ssh/id_rsa_theiconic &>/dev/null
 # added by travis gem
 [ -f /Users/gborges/.travis/travis.sh ] && source /Users/gborges/.travis/travis.sh
 
+# add virtualenvwrapper to path
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3 # using the brew one
+source `which virtualenvwrapper.sh`
+
+# Anaconda
+export PATH="/anaconda3/bin:$PATH"
