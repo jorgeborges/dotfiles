@@ -6,7 +6,7 @@ root: ~/
 windows:
   - console: cd && clear
   - dashboard: cd ~/repos/tablero && yarn start
-  - solr: solr restart -f
+  #- solr: solr restart -f
   - shop:
       layout: even-horizontal
       panes:
