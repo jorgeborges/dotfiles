@@ -122,9 +122,10 @@ export PATH="/usr/local/opt/php71/bin:$PATH"
 #export PATH="/usr/local/share/python:$PATH"
 
 # Go
-#export GOPATH=$HOME/go:$HOME/Repositories/lang-playground/go
-#export PATH=$PATH:$GOPATH/bin
-#export PATH=$PATH:/usr/local/Cellar/go/1.2.1/libexec/bin
+export GOPATH=$HOME/repos/go
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
 
 # Scala
 #export SBT_OPTS=-XX:MaxPermSize=512M
