@@ -47,6 +47,11 @@ source $ZSH/oh-my-zsh.sh
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/sbin:/usr/sbin
 
 # Aliases
+# Cheat.sh
+function cheat() {
+	curl cheat.sh/$1
+}
+# Direct access to this config
 alias zshconfig="vim ~/.zshrc"
 ## Use a long listing format ##
 alias ll='ls -lah'
