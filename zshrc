@@ -73,6 +73,12 @@ alias doi="docker images"
 alias dori="docker rmi"
 alias dorc="docker rm"
 alias dops="docker ps -a"
+## Terraform
+alias tf="terraform"
+## Docker Containers
+alias open_nestcli="docker run -it --rm -v `pwd`:/workspace nestjs/cli:6.3.0"
+## Lazydocker
+alias lzd="lazydocker"
 
 function wipe_container() {
     docker stop $1
