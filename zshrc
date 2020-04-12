@@ -39,7 +39,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 #plugins=(git heroku rails ruby tmux tmuxinator golang docker vagrant zsh-syntax-highlighting history-substring-search lein)
-plugins=(git kubectl ruby golang docker history-substring-search zsh-syntax-highlighting terraform)
+plugins=(git kubectl ruby golang docker history-substring-search zsh-syntax-highlighting terraform wakatime)
 
 source $ZSH/oh-my-zsh.sh
 
