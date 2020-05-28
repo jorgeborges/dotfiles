@@ -129,8 +129,8 @@ if which rbenv > /dev/null; then eval "$(rbenv init - --no-rehash)"; fi
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 
 # PHP 7
-export PATH="/usr/local/opt/php@7.1/bin:$PATH"
-export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
+export PATH="/usr/local/opt/php@7.3/bin:$PATH"
+export PATH="/usr/local/opt/php@7.3/sbin:$PATH"
 
 # Python
 #export PATH="/usr/local/share/python:$PATH"
