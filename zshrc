@@ -79,6 +79,8 @@ alias tf="terraform"
 alias open_nestcli="docker run -it --rm -v `pwd`:/workspace nestjs/cli:6.3.0"
 ## Lazydocker
 alias lzd="lazydocker"
+# Git
+alias gdst="git diff --stat"
 
 function wipe_container() {
     docker stop $1
