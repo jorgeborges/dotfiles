@@ -1,0 +1,14 @@
+# ~/.tmuxinator/hamiware.yml
+
+name: hamiware
+root: ~/
+
+windows:
+  - console: cd && clear
+  - tablero: cd ~/repos/tablero && yarn start
+  #- lzd: lzd
+  - tech-trooper:
+      layout: even-horizontal
+      panes:
+          - cd ~/repos_theiconic/tech-trooper/ && clear
+          - cd ~/repos_theiconic/tech-trooper/ && clear && git status
