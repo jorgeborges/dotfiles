@@ -81,6 +81,7 @@ alias open_nestcli="docker run -it --rm -v `pwd`:/workspace nestjs/cli:6.3.0"
 alias lzd="lazydocker"
 # Git
 alias gdst="git diff --stat"
+alias guc="git ls-files --others --exclude-standard | xargs wc -l"
 
 function wipe_container() {
     docker stop $1
@@ -160,6 +161,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # Lazygit
 alias lg="lazygit"
+
 # For changing between Java versions
 alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -E "\d.\d.\d_\d\d" | cut -d , -f 1 | colrm 1 4 | grep -v Home'
 
@@ -205,9 +207,15 @@ ssh-add -K ~/.ssh/id_rsa_theiconic &>/dev/null
 [ -f /Users/gborges/.travis/travis.sh ] && source /Users/gborges/.travis/travis.sh
 
 # add virtualenvwrapper to path
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3 # using the brew one
-source `which virtualenvwrapper.sh`
+#export WORKON_HOME=$HOME/.virtualenvs
+#export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3 # using the brew one
+#source `which virtualenvwrapper.sh`
 
 # Anaconda
 export PATH="/anaconda3/bin:$PATH"
+
+# Add Visual Studio Code (code)
+export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
+
+# Dad jokes
+alias dad="curl https://icanhazdadjoke.com/ && echo"
