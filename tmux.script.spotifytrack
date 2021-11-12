@@ -2,11 +2,11 @@
 
 # Just grabs the current Spotify song information
 
-#track_info = `osascript -e 'tell application "Spotify" to get {name, artist} of current track'`
+track_info = `osascript -e 'tell application "Spotify" to get {name, artist} of current track'`
 
-#if $?.success?
- # puts '♪ ' + track_info.chomp.gsub(/,/, ' -') + ' ♫'
-#else
+if $?.success?
+ puts '♪ ' + track_info.chomp.gsub(/,/, ' -') + ' ♫'
+else
   puts '♪  music_display() ♫'
-#end
+end
 
