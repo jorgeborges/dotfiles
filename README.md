@@ -12,7 +12,7 @@ My configuration files for Vim, tmux, git, etc etc.
 Displays a resume of open tasks for a Todoist account. Configurable via config file with API token. Should be read as:
 * ◯ overdue
 * ✕ for today
-* ⃤  are scheduled
+* □  are scheduled
 * △ no due date or icebox
 
 Goes on my tmux status bar.
