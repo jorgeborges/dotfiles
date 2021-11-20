@@ -1,0 +1,8 @@
+# ~/.tmuxinator/sws.yml
+
+name: sws
+root: ~/
+
+windows:
+  - console: cd && clear
+  - tablero: cd && clear
