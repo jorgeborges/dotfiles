@@ -4,5 +4,9 @@ name: sws
 root: ~/
 
 windows:
-  - console: cd && clear
-  - tablero: cd && clear
+  - terminal: cd && clear && ila
+  - analysis: cd ~/repos_sws/analysis && illg && gst
+  - statements: cd ~/repos_sws/statements && illg && gst
+  - api: cd ~/repos_sws/api && illg && gst
+  - graphql: cd ~/repos_sws/graphql && illg && gst
+  - redis-cli: redis-cli
