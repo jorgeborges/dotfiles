@@ -106,9 +106,6 @@ export EDITOR='vim'
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Disabling start/stop output to avoid clash with tmux
-stty -ixon -ixoff
-
 ## updates $PATH for other programs
 # Ruby
 if [[ ":$PATH:" != *":/usr/local/opt/ruby/bin:"* ]]; then
