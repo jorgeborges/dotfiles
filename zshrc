@@ -155,5 +155,15 @@ alias tf="terraform"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# my custom p10k prompt
+function prompt_my_altera_prompt() {
+  p10k segment -t "%{$fg[red]%}❯%{$reset_color%}%{$fg[yellow]%}❯%{$reset_color%}%{$fg[cyan]%}❯%{$reset_color%}"
+}
+# add the altera prompt and config
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=my_altera_prompt
+typeset -g POWERLEVEL9K_MY_ALTERA_PROMPT_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=
+typeset -g POWERLEVEL9K_MY_ALTERA_PROMPT_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL=
+typeset -g POWERLEVEL9K_MY_ALTERA_PROMPT_LEFT_{LEFT,RIGHT}_WHITESPACE=
+
 # fuzzy autocomplete
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
