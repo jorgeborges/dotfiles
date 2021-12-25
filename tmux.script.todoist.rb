@@ -41,10 +41,10 @@ todoist.each do |item|
 end
 
 totals = {
-  overdue: '◯ ' + overdue.to_s,
-  today: '✕ ' + today.to_s,
-  future: '□ ' + future.to_s,
-  icebox: '△ ' + icebox.to_s
+  overdue: ' ' + overdue.to_s,
+  today: ' ' + today.to_s,
+  future: '﯑ ' + future.to_s,
+  icebox: ' ' + icebox.to_s
 }
 
 puts totals[ARGV[0].to_sym]
