@@ -119,6 +119,11 @@ if [[ ":$PATH:" != *":/usr/local/opt/php@7.3/bin:"* ]]; then
   export PATH="/usr/local/opt/php@7.3/sbin:$PATH"
 fi
 
+# Python 3
+if [[ ":$PATH:" != *":/usr/local/opt/python@3.10/bin:"* ]]; then
+  export PATH="/usr/local/opt/python@3.10/bin:$PATH"
+fi
+
 # Node version manager (NVM)
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
