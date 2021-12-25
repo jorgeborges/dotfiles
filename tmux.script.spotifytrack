@@ -7,6 +7,6 @@ track_info = `osascript -e 'tell application "Spotify" to get {name, artist} of 
 if $?.success?
  puts '♪ ' + track_info.chomp.gsub(/,/, ' -') + ' ♫'
 else
-  puts '♪  music_display() ♫'
+  puts '♪ music_display() ♫'
 end
 
