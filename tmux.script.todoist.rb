@@ -10,15 +10,15 @@ require 'yaml'
 
 config = YAML.load_file(__dir__ + '/config/todoist.yml')
 
-  begin
-    response = RestClient.get 'https://api.todoist.com/rest/v1/tasks', {:Authorization => 'Bearer ' + config['api_token']}
-  rescue
-    if ARGV[0] == 'overdue'
-      puts 'task_display()'
-    else
-      puts '.'
-    end
-    Kernel.abort
+begin
+  response = RestClient.get 'https://api.todoist.com/rest/v1/tasks', {:Authorization => 'Bearer ' + config['api_token']}
+rescue
+  if ARGV[0] == 'overdue'
+    puts 'task_display()'
+  else
+    puts '.'
+  end
+  Kernel.abort
 end
 
 todoist = JSON.parse response
