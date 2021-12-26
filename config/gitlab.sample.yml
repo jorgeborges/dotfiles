@@ -1,2 +1,4 @@
 personal_access_token: "my-secret-token"
 my_username: "my-username"
+ignore_review_for_merge_requests_ids:
+  - -1 # sample value, use your own
