@@ -15,7 +15,7 @@ merge_request_type = ARGV[0]
 gitlab_api_base_url = 'https://gitlab.com/api/v4/merge_requests'
 headers = {:Authorization => 'Bearer ' + config['personal_access_token']}
 username = config['my_username']
-ignore_review_for_merge_requests_ids = config['ignore_review_for_merge_requests_ids']
+ignore_review_for_merge_requests_iids = config['ignore_review_for_merge_requests_iids']
 
 begin
   case merge_request_type
@@ -32,7 +32,7 @@ begin
 end
 
 merge_requests = JSON.parse response
-merge_requests = merge_requests.select { |merge_request| !ignore_review_for_merge_requests_ids.include? merge_request['iid'] }
+merge_requests = merge_requests.select { |merge_request| !ignore_review_for_merge_requests_iids.include? merge_request['iid'] }
 merge_request_count = merge_requests.length()
 
 merge_request_icons = {
