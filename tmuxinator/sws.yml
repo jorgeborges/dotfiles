@@ -5,8 +5,9 @@ root: ~/
 
 windows:
   - terminal: cd && clear && ila
-  - redis-cli: redis-cli
-  - analysis: cd ~/repos_sws/analysis && illg && gst
+  - discover: cd ~/repos_sws/discover && illg && gst
+  - mono: cd ~/repos_sws/mono && illg && gst
+  - notes: cd ~/repos_sws/notes && illg && gst
   - statements: cd ~/repos_sws/statements && illg && gst
   - api: cd ~/repos_sws/api && illg && gst
   - graphql: cd ~/repos_sws/graphql && illg && gst
