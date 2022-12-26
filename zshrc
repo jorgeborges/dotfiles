@@ -162,7 +162,7 @@ alias tf="terraform"
 
 # my custom p10k prompt
 function prompt_my_altera_prompt() {
-  p10k segment -t "%{$fg[red]%}❯%{$reset_color%}%{$fg[yellow]%}❯%{$reset_color%}%{$fg[cyan]%}❯%{$reset_color%}"
+  p10k segment -t "%{$reset_color%}%{$fg[red]%}❯%{$reset_color%}%{$fg[yellow]%}❯%{$reset_color%}%{$fg[cyan]%}❯%{$reset_color%}"
 }
 # add the altera prompt and config
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=my_altera_prompt
