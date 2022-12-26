@@ -25,7 +25,7 @@ todoist = JSON.parse response
 
 overdue = today = future = icebox = 0
 todoist.each do |item|
-  next if item['completed']
+  next if item['is_completed']
 
   if item['due'].nil?
     icebox += 1
