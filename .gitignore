@@ -1,6 +1,5 @@
 *.log
 
 # config files
-todoist.yml
-gitlab.yml
-config.yaml
+config/*.yml
+!config/*.sample.yml
