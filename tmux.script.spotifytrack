@@ -2,11 +2,20 @@
 
 # Just grabs the current Spotify song information
 
+require 'yaml'
+
+config = YAML.load_file(__dir__ + '/config/spotify.yml')
+
+if config['enabled'] == false
+  puts '♪ music_display(off) ♫'
+  exit
+end
+
 track_info = `osascript -e 'tell application "Spotify" to get {name, artist} of current track'`
 
 if $?.success?
  puts '♪ ' + track_info.chomp.gsub(/,/, ' -') + ' ♫'
 else
-  puts '♪ music_display() ♫'
+  puts '♪ music_display(err) ♫'
 end
 
