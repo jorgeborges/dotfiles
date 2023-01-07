@@ -108,22 +108,16 @@ export EDITOR='vim'
 # export ARCHFLAGS="-arch x86_64"
 
 ## updates $PATH for other programs
-# Ruby
-if [[ ":$PATH:" != *":/usr/local/opt/ruby/bin:"* ]]; then
-  export PATH=/usr/local/opt/ruby/bin:$PATH
-  export PATH=/usr/local/lib/ruby/gems/3.0.0/bin:$PATH
-fi
-
 # PHP 7.3
-if [[ ":$PATH:" != *":/usr/local/opt/php@7.3/bin:"* ]]; then
-  export PATH="/usr/local/opt/php@7.3/bin:$PATH"
-  export PATH="/usr/local/opt/php@7.3/sbin:$PATH"
-fi
+# if [[ ":$PATH:" != *":/usr/local/opt/php@7.3/bin:"* ]]; then
+  # export PATH="/usr/local/opt/php@7.3/bin:$PATH"
+  # export PATH="/usr/local/opt/php@7.3/sbin:$PATH"
+# fi
 
 # Python 3
-if [[ ":$PATH:" != *":/usr/local/opt/python@3.10/bin:"* ]]; then
-  export PATH="/usr/local/opt/python@3.10/bin:$PATH"
-fi
+# if [[ ":$PATH:" != *":/usr/local/opt/python@3.10/bin:"* ]]; then
+  # export PATH="/usr/local/opt/python@3.10/bin:$PATH"
+# fi
 
 # Node version manager (NVM)
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
@@ -169,6 +163,9 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=my_altera_prompt
 typeset -g POWERLEVEL9K_MY_ALTERA_PROMPT_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=
 typeset -g POWERLEVEL9K_MY_ALTERA_PROMPT_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL=
 typeset -g POWERLEVEL9K_MY_ALTERA_PROMPT_LEFT_{LEFT,RIGHT}_WHITESPACE=
+
+# Ruby - rbenv
+eval "$(rbenv init --no-rehash - zsh)"
 
 # fuzzy autocomplete
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
