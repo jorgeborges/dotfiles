@@ -1,0 +1,9 @@
+# ~/.tmuxinator/shippit.yml
+
+name: shippit
+root: ~/
+
+windows:
+  - terminal: cd && clear && ila
+  - connect-shopify: cd ~/repos_shippit/connect-shopify && illg && gst
+  - connect-ui: cd ~/repos_shippit/connect-ui && illg && gst
