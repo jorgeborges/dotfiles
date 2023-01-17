@@ -1,7 +1,7 @@
 JB dotfiles
 ========
 
-My configuration files for Vim, tmux, git, etc etc.
+My configuration files for Vim, tmux, git, etc.
 
 ## Features
 
