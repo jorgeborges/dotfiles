@@ -5,5 +5,12 @@ root: ~/
 
 windows:
   - terminal: cd && clear && ila
-  - connect-shopify: cd ~/repos_shippit/connect-shopify && illg && gst
-  - connect-ui: cd ~/repos_shippit/connect-ui && illg && gst
+  - shop-infra:
+      layout: even-horizontal
+      panes:
+        - cd ~/repos_shippit/connect-shopify && illg
+        - cd ~/repos_shippit/connect-shopify && illg
+  - shop-api: cd ~/repos_shippit/connect-shopify && illg && gst
+  - shop-worker: cd ~/repos_shippit/connect-shopify && illg && gst
+  - shop-consumer: cd ~/repos_shippit/connect-shopify && illg && gst
+  - shop-ui: cd ~/repos_shippit/connect-ui && illg && gst

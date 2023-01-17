@@ -1,43 +1,82 @@
 #!/usr/bin/env ruby
 
-# Gets merge requests assignned to me and pending reviews
+# Gets pull requests created and assigned to me, also my pending reviews
 # Outputs icons with total counts
 
-require 'rest-client' # has to be gem installed
-require 'json'
-require 'date'
+require 'octokit'
 require 'yaml'
 
-# config = YAML.load_file(__dir__ + '/config/gitlab.yml')
+config = YAML.load_file(__dir__ + '/config/github.yml')
 
-merge_request_type = ARGV[0]
+client = Octokit::Client.new(access_token: config['personal_access_token'])
 
-# gitlab_api_base_url = 'https://gitlab.com/api/v4/merge_requests'
-# headers = {:Authorization => 'Bearer ' + config['personal_access_token']}
-# username = config['my_username']
-# ignore_review_for_merge_requests_iids = config['ignore_review_for_merge_requests_iids']
-
-# begin
-#   case merge_request_type
-#   when 'assigned'
-#     response = RestClient.get gitlab_api_base_url + '?scope=assigned_to_me&state=opened', headers
-#   when 'review'
-#     response = RestClient.get gitlab_api_base_url + '?scope=all&state=opened&reviewer_username=' + username, headers
-#   else
-#     raise 'Invalid argument'
-#   end
-#   rescue
-#     puts 'gitlab_display()'
-#     Kernel.abort
-# end
-
-# merge_requests = JSON.parse response
-# merge_requests = merge_requests.select { |merge_request| !ignore_review_for_merge_requests_iids.include? merge_request['iid'] }
-# merge_request_count = merge_requests.length()
-
-merge_request_icons = {
-  assigned: '華',
-  review: ' ',
+query = <<-GRAPHQL
+query {
+  user(login: "#{config['my_username']}") {
+    pullRequests(first: 100, states: OPEN) {
+      totalCount
+      nodes {
+        author {
+          login
+        }
+        createdAt
+        number
+        databaseId
+        title
+        assignees(first: 15) {
+          nodes {
+            login
+          }
+        }
+        reviewRequests(first: 15) {
+          nodes {
+            requestedReviewer {
+              ... on User {
+                login
+              }
+              ... on Team {
+                login: name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
+GRAPHQL
 
-puts merge_request_icons[merge_request_type.to_sym] + '?'
+begin
+  response = client.post '/graphql', { query: query }.to_json
+rescue
+  puts 'network_error'
+  Kernel.abort
+end
+
+ignore_review_for_merge_requests_ids = config['ignore_review_for_merge_requests_ids']
+
+begin
+  pr_review = 0
+  pr_assigned = 0
+  response.data.user.pullRequests.nodes.each do |pull_request|
+    pull_request.reviewRequests.nodes.each do |review_request|
+      if review_request.requestedReviewer.login == config['my_username'] || review_request.requestedReviewer.login == config['my_team']
+        pr_review += 1 unless ignore_review_for_merge_requests_ids.include? pull_request.databaseId
+      end
+    end
+
+    if pull_request.author.login == config['my_username']
+      pr_assigned += 1
+      next
+    end
+
+    pull_request.assignees.nodes.each do |assignee|
+      pr_assigned += 1 if assignee.login == config['my_username']
+    end
+  end
+rescue
+  puts 'parse_error'
+  Kernel.abort
+end
+
+puts '#[fg=green]華' + pr_assigned.to_s + ' #[fg=yellow] ' + pr_review.to_s
