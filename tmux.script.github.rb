@@ -136,9 +136,16 @@ if display_mode == 'status_bar'
 elsif display_mode == 'list_details'
   puts 'Github Pull Requests'.colorize(:light_blue)
   puts 'Assigned to me:'.colorize(:light_green)
+  if pr_assigned_details.empty? then
+    puts '  None'
+  end
   pr_assigned_details.each do |pr|
     # puts "  #{pr[:repo]} ##{pr[:number]} - #{pr[:title]} #{DateTime.strptime(pr[:created_at], '%Y-%m-%dT%H:%M:%SZ')} (#{pr[:url]})"
     puts "  #{pr[:repo]} ##{pr[:number]} - #{pr[:title]} #{pr[:created_at]} (#{pr[:url]})"
+  end
+
+  if pr_review_details.empty? then
+    puts '  None'
   end
   puts 'Pending review:'.colorize(:yellow)
   pr_review_details.each do |pr|
