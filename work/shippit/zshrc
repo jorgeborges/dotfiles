@@ -9,7 +9,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # $PATH
-export PATH=~/.brew/opt/libpq/bin:/Applications/Keybase.app/Contents/SharedSupport/bin:~/.brew/bin:~/.brew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+export PATH=~/Library/Python/3.9/bin:~/.brew/opt/libpq/bin:/Applications/Keybase.app/Contents/SharedSupport/bin:~/.brew/bin:~/.brew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -107,6 +107,7 @@ export EDITOR='vim'
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="$PATH:`yarn global bin`"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -156,3 +157,7 @@ eval "$(rbenv init --no-rehash - zsh)"
 
 # fuzzy finder
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Shippit ENVs
+source ~/.config/shippit/secrets
+
