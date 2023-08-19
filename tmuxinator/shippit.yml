@@ -5,8 +5,9 @@ root: ~/
 
 windows:
   - terminal: cd && clear && ila
+  - partner-referral: cd ~/repos_shippit/connect-partner-referral-service && illg && gst
   - shop-infra:
-      layout: even-horizontal
+      layout: even-vertical
       panes:
         - cd ~/repos_shippit/connect-shopify && illg
         - cd ~/repos_shippit/connect-shopify && illg
@@ -14,3 +15,8 @@ windows:
   - shop-worker: cd ~/repos_shippit/connect-shopify && illg && gst
   - shop-consumer: cd ~/repos_shippit/connect-shopify && illg && gst
   - shop-ui: cd ~/repos_shippit/connect-ui && illg && gst
+  - dos-db:
+      layout: even-vertical
+      panes:
+        - cd ~/repos_shippit/connect-shopify && illg
+        - cd ~/repos_shippit/connect-partner-referral-service && illg
