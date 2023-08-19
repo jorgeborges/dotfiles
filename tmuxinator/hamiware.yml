@@ -4,8 +4,7 @@ name: hamiware
 root: ~/
 
 windows:
-  - console: cd && clear
-  - tablero: cd && clear
+  - terminal: cd && clear
   #- lzd: lzd
   #- tech-trooper:
   #    layout: even-horizontal
