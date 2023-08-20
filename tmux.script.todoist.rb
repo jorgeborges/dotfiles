@@ -30,11 +30,12 @@ todoist.each do |item|
   if item['due'].nil?
     icebox += 1
   else
-    if Date.parse(item['due']['date']) < Date.today
+    due_date = Date.parse(item['due']['date'])
+    if due_date < Date.today
       overdue += 1
-    elsif Date.parse(item['due']['date']) == Date.today
+    elsif due_date == Date.today
       today += 1
-    else
+    elsif due_date > Date.today && due_date <= Date.today + 7
       future += 1
     end
   end
