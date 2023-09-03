@@ -114,10 +114,8 @@ export EDITOR='vim'
   # export PATH="/usr/local/opt/php@7.3/sbin:$PATH"
 # fi
 
-# Python 3
-# if [[ ":$PATH:" != *":/usr/local/opt/python@3.10/bin:"* ]]; then
-  # export PATH="/usr/local/opt/python@3.10/bin:$PATH"
-# fi
+# Python (pyenv)
+eval "$(pyenv init --path)"
 
 # Node version manager (NVM)
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
@@ -149,10 +147,17 @@ alias dorc="docker rm"
 alias dops="docker ps -a"
 ## Terraform
 alias tf="terraform"
+## Python General Venv
+alias genenv="source ~/general_venv/general/bin/activate"
 
 # powerline10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# p10k custom prompts colors
+typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=7
+typeset -g POWERLEVEL9K_VIRTUALENV_BACKGROUND=34
+typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
 
 # my custom p10k prompt
 function prompt_my_altera_prompt() {
