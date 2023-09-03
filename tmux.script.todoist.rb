@@ -35,7 +35,8 @@ todoist.each do |item|
       overdue += 1
     elsif due_date == Date.today
       today += 1
-    elsif due_date > Date.today && due_date <= Date.today + 7
+    # only count non-recurring tasks in the next 7 days as future
+    elsif due_date > Date.today && due_date <= Date.today + 7 && item['due']['is_recurring'] == false
       future += 1
     end
   end
