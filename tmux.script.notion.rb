@@ -20,6 +20,7 @@ config = YAML.load_file(__dir__ + '/config/notion.yml')
 # Initialize counters for each task status
 statuses = {
   "Not started" => 0,
+  "Ready to start" => 0,
   "Scheduled" => 0,
   "In progress" => 0
 }
@@ -40,6 +41,12 @@ body = {
             "property": "Status",
             "status": {
               "equals": "Not started"
+            }
+          },
+          {
+            "property": "Status",
+            "status": {
+              "equals": "Ready to start"
             }
           },
           {
@@ -85,19 +92,21 @@ end
 
 # Map statuses to emojis and colors
 status_emojis = {
-  "Not started" => "",
-  "Scheduled" => "﯑",
-  "In progress" => ""
+  "Not started" => " ",
+  "Ready to start" => "\uf9fd",
+  "Scheduled" => "﯑ ",
+  "In progress" => " "
 }
 status_colors = {
   "Not started" => :gray,
+  "Ready to start" => :gray,
   "Scheduled" => :yellow,
   "In progress" => :blue
 }
 
 # Print the counts in the desired format
 output = statuses.map do |status, count|
-  "#{colorize(status_emojis[status] + ' ' + count.to_s, status_colors[status])}"
+  "#{colorize(status_emojis[status] + count.to_s, status_colors[status])}"
 end.join(" ")
 
 puts output
