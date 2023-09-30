@@ -4,109 +4,123 @@ require 'rest-client'
 require 'json'
 require 'yaml'
 
-def colorize(text, color)
-  colors = {
-    gray: "#[fg=darkgray]",
-    yellow: "#[fg=yellow]",
-    blue: "#[fg=blue]"
+module NotionTask
+  STATUS_CONFIG = {
+    "Not started" => {emoji: " ", color: :gray},
+    "Ready to start" => {emoji: "\uf9fd", color: :gray},
+    "Scheduled" => {emoji: "﯑ ", color: :yellow},
+    "In progress" => {emoji: " ", color: :blue}
   }
-  "#{colors[color]}#{text}#[fg=default]"
+
+  class Client
+    NOTION_API_URL = "https://api.notion.com/v1/databases"
+
+    def initialize(config)
+      @config = config
+    end
+
+    def fetch_tasks
+      body = construct_request_body
+      response = make_api_request(body)
+      JSON.parse(response.body)["results"]
+    end
+
+    private
+
+    def construct_request_body
+      {
+        "filter": {
+          "and": [
+            {
+              "property": "Assignee",
+              "people": {
+                "contains": @config['user_id']
+              }
+            },
+            {
+              "or": STATUS_CONFIG.keys.map do |status|
+                {
+                  "property": "Status",
+                  "status": {
+                    "equals": status
+                  }
+                }
+              end
+            }
+          ]
+        }
+      }
+    end
+
+    def make_api_request(body)
+      url = "#{NOTION_API_URL}/#{@config['database_id']}/query"
+      headers = {
+        :Authorization => 'Bearer ' + @config['integration_secret'],
+        :content_type => :json,
+        :accept => :json,
+        'Notion-Version' => '2022-06-28'
+      }
+
+      begin
+        RestClient.post(url, body.to_json, headers)
+      rescue RestClient::ExceptionWithResponse => e
+        puts 'Failed to fetch data from Notion API.'
+        Kernel.abort
+      end
+    end
+  end
+
+  class Processor
+    def initialize
+      @status_counts = Hash.new(0)
+      STATUS_CONFIG.keys.each { |status| @status_counts[status] = 0 }
+    end
+
+    def process(tasks)
+      tasks.each do |task|
+        status_name = task["properties"]["Status"]["status"]["name"]
+        @status_counts[status_name] += 1 if @status_counts.key?(status_name)
+      end
+      @status_counts
+    end
+  end
+
+  class Reporter
+    def initialize(status_counts)
+      @status_counts = status_counts
+    end
+
+    def display
+      output = @status_counts.map do |status, count|
+        emoji = STATUS_CONFIG[status][:emoji]
+        color = STATUS_CONFIG[status][:color]
+        colorize(emoji + count.to_s, color)
+      end.join(" ")
+
+      puts output
+    end
+
+    private
+
+    def colorize(text, color)
+      colors = {
+        gray: "#[fg=darkgray]",
+        yellow: "#[fg=yellow]",
+        blue: "#[fg=blue]"
+      }
+      "#{colors[color]}#{text}#[fg=default]"
+    end
+  end
 end
 
-
-# Load API configurations for Notion from the YAML file
+# Main program
 config = YAML.load_file(__dir__ + '/config/notion.yml')
 
-# Initialize counters for each task status
-statuses = {
-  "Not started" => 0,
-  "Ready to start" => 0,
-  "Scheduled" => 0,
-  "In progress" => 0
-}
+client = NotionTask::Client.new(config)
+tasks = client.fetch_tasks
 
-# Construct the request body for filtering tasks by Assignee and Status
-body = {
-  "filter": {
-    "and": [
-      {
-        "property": "Assignee",
-        "people": {
-          "contains": config['user_id']
-        }
-      },
-      {
-        "or": [
-          {
-            "property": "Status",
-            "status": {
-              "equals": "Not started"
-            }
-          },
-          {
-            "property": "Status",
-            "status": {
-              "equals": "Ready to start"
-            }
-          },
-          {
-            "property": "Status",
-            "status": {
-              "equals": "Scheduled"
-            }
-          },
-          {
-            "property": "Status",
-            "status": {
-              "equals": "In progress"
-            }
-          }
-        ]
-      }
-    ]
-  }
-}
+processor = NotionTask::Processor.new
+status_counts = processor.process(tasks)
 
-begin
-  # Make the POST request to Notion API
-  response = RestClient.post "https://api.notion.com/v1/databases/#{config['database_id']}/query", body.to_json, {
-    :Authorization => 'Bearer ' + config['integration_secret'],
-    :content_type => :json,
-    :accept => :json,
-    'Notion-Version' => '2022-06-28'
-  }
-
-rescue RestClient::ExceptionWithResponse => e
-  puts 'Failed to fetch data from Notion API.'
-  Kernel.abort
-end
-
-# Parse the response
-notion_tasks = JSON.parse(response.body)["results"]
-
-# Count tasks based on their status
-notion_tasks.each do |task|
-  status_name = task["properties"]["Status"]["status"]["name"]
-  statuses[status_name] += 1 if statuses.key?(status_name)
-end
-
-# Map statuses to emojis and colors
-status_emojis = {
-  "Not started" => " ",
-  "Ready to start" => "\uf9fd",
-  "Scheduled" => "﯑ ",
-  "In progress" => " "
-}
-status_colors = {
-  "Not started" => :gray,
-  "Ready to start" => :gray,
-  "Scheduled" => :yellow,
-  "In progress" => :blue
-}
-
-# Print the counts in the desired format
-output = statuses.map do |status, count|
-  "#{colorize(status_emojis[status] + count.to_s, status_colors[status])}"
-end.join(" ")
-
-puts output
+reporter = NotionTask::Reporter.new(status_counts)
+reporter.display
