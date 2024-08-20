@@ -86,7 +86,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker docker-compose kubectl z zsh-autosuggestions zsh-syntax-highlighting) # zsh-syntax-highlighting MUST be the last plugin
+plugins=(git docker docker-compose kubectl you-should-use z zsh-autosuggestions zsh-syntax-highlighting) # zsh-syntax-highlighting MUST be the last plugin
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 source $ZSH/oh-my-zsh.sh
@@ -116,6 +116,8 @@ export EDITOR='vim'
 
 # Python (pyenv)
 eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 # Node version manager (NVM)
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
@@ -158,6 +160,7 @@ alias genenv="source ~/general_venv/general/bin/activate"
 typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=7
 typeset -g POWERLEVEL9K_VIRTUALENV_BACKGROUND=34
 typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
+typeset -g POWERLEVEL9K_PYENV_FOREGROUND=7
 
 # my custom p10k prompt
 function prompt_my_altera_prompt() {
@@ -172,5 +175,14 @@ typeset -g POWERLEVEL9K_MY_ALTERA_PROMPT_LEFT_{LEFT,RIGHT}_WHITESPACE=
 # Ruby - rbenv
 eval "$(rbenv init --no-rehash - zsh)"
 
+# pnpm
+export PNPM_HOME="/Users/jorgeborges/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
 # fuzzy autocomplete
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
