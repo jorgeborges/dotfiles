@@ -4,10 +4,14 @@ name: hamiware
 root: ~/
 
 windows:
-  - terminal: cd && clear
-  #- lzd: lzd
-  #- tech-trooper:
-  #    layout: even-horizontal
-  #    panes:
-  #        - cd ~/repos_theiconic/tech-trooper/ && clear
-  #        - cd ~/repos_theiconic/tech-trooper/ && clear && git status
+  - terminal: cd && illg
+  - hamiware-website:
+      layout: even-horizontal
+      panes:
+        - cd ~/repos_hamiware/hamiware-website/ && illg
+        - cd ~/repos_hamiware/hamiware-website/ && gst
+  - wiseshop-website:
+      layout: even-horizontal
+      panes:
+        - cd ~/repos_hamiware/wiseshop-website/ && illg
+        - cd ~/repos_hamiware/wiseshop-website/ && gst
