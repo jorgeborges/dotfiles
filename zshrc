@@ -186,3 +186,5 @@ esac
 # fuzzy autocomplete
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Hamiware ENV
+source ~/.config/hamiware/secrets.env
