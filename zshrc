@@ -147,8 +147,8 @@ alias doi="docker images"
 alias dori="docker rmi"
 alias dorc="docker rm"
 alias dops="docker ps -a"
-## Terraform
-alias tf="terraform"
+## Terraform (OpenTofu)
+alias tf="tofu"
 ## Python General Venv
 alias genenv="source ~/general_venv/general/bin/activate"
 
