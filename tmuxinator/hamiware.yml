@@ -3,15 +3,41 @@
 name: hamiware
 root: ~/
 
+enable_pane_titles: true
+
 windows:
   - terminal: cd && illg
   - hamiware-website:
       layout: even-horizontal
       panes:
-        - cd ~/repos_hamiware/hamiware-website/ && illg
-        - cd ~/repos_hamiware/hamiware-website/ && gst
-  - wiseshop-website:
+        - service:
+          - cd ~/repos_hamiware/hamiware-website/ && illg
+        - commands:
+          - cd ~/repos_hamiware/hamiware-website/ && gst
+  - pulseowl-monorepo:
+      #layout: even-horizontal
+      layout: 0585,253x63,0,0{126x63,0,0,3,126x63,127,0[126x31,127,0,7,126x31,127,32,10]}
+      panes:
+        - commands:
+          - cd ~/repos_hamiware/pulseowl/ && illg
+        - api-local-tunnel:
+          - cd ~/.cloudflared && illg
+        - app-local-tunnel:
+          - cd ~/.cloudflared && illg
+  - pulseowl-backend:
+      #layout: even-horizontal
+      layout: 3b34,253x63,0,0{126x63,0,0[126x31,0,0,4,126x31,0,32,11],126x63,127,0,8}
+      panes:
+        - database:
+          - cd ~/repos_hamiware/pulseowl/backend && illg
+        - service:
+          - cd ~/repos_hamiware/pulseowl/backend && illg
+        - commands:
+          - cd ~/repos_hamiware/pulseowl/backend && gst
+  - pulseowl-frontend:
       layout: even-horizontal
       panes:
-        - cd ~/repos_hamiware/wiseshop-website/ && illg
-        - cd ~/repos_hamiware/wiseshop-website/ && gst
+        - service:
+          - cd ~/repos_hamiware/pulseowl/frontend && illg
+        - commands:
+          - cd ~/repos_hamiware/pulseowl/frontend && gst
