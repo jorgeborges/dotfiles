@@ -188,3 +188,8 @@ esac
 
 # Hamiware ENV
 source ~/.config/hamiware/secrets.env
+
+# psql
+export PATH="/usr/local/opt/libpq/bin:$PATH"
+
+#PATH=~/.console-ninja/.bin:$PATH
