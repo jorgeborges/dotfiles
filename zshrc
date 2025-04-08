@@ -151,6 +151,8 @@ alias dops="docker ps -a"
 alias tf="tofu"
 ## Python General Venv
 alias genenv="source ~/general_venv/general/bin/activate"
+## tmuxinator
+alias thami="tmuxinator hamiware"
 
 # powerline10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
