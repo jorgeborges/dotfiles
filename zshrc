@@ -198,4 +198,9 @@ source ~/.config/hamiware/secrets.env
 # psql
 export PATH="/usr/local/opt/libpq/bin:$PATH"
 
+# Disable Ctrl-S/Ctrl-Q (XON/XOFF) so they can’t freeze the terminal
+if [[ -t 0 ]]; then
+    stty -ixon
+fi
+
 #PATH=~/.console-ninja/.bin:$PATH
