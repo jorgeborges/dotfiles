@@ -18,10 +18,14 @@ windows:
         - 🛠️ commands:
           - cd ~/repos_hamiware/hamiware-website/ && gst
   - pulseowl-monorepo:
-      layout: a6e0,253x63,0,0{131x63,0,0[131x47,0,0,3,131x15,0,48,14],121x63,132,0[121x15,132,0,7,121x13,132,16,8,121x14,132,30,9,121x18,132,45,10]}
+    #layout: a6e0,253x63,0,0{131x63,0,0[131x47,0,0,3,131x15,0,48,14],121x63,132,0[121x15,132,0,7,121x13,132,16,8,121x14,132,30,9,121x18,132,45,10]}
+      layout: 8105,253x63,0,0{131x63,0,0[131x43,0,0,3,131x8,0,44,15,131x10,0,53,7],121x63,132,0[121x15,132,0,8,121x13,132,16,9,121x14,132,30,10,121x18,132,45,11]}
       panes:
         - 🛠️ commands:
           - cd ~/repos_hamiware/pulseowl/ && illg
+        - 🖥️ 🛤️  sst-tunnel:
+          - cd ~/repos_hamiware/pulseowl/
+          - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm sst:tunnel"
         - 🧬📚 sst-dev-basic:
           - cd ~/repos_hamiware/pulseowl/
           - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm sst:dev:basic"
@@ -46,7 +50,7 @@ windows:
           - sleep 3 && tmux send-keys -t "$TMUX_PANE" "docker-compose up"
         - 🟢 service:
           - cd ~/repos_hamiware/pulseowl/apps/backend && illg
-          - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm run start:http:dev"
+          - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm run start:web-server:dev"
         - 🛠️ commands:
           - cd ~/repos_hamiware/pulseowl/apps/backend && gst
   - pulseowl-frontend:
@@ -57,3 +61,7 @@ windows:
           - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm run dev"
         - 🛠️ commands:
           - cd ~/repos_hamiware/pulseowl/apps/frontend && gst
+  - pulseowl-integration-aws:
+      panes:
+        - 🛠️ commands:
+          - cd ~/repos_hamiware/pulseowl/apps/integration-aws && gst
