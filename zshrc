@@ -17,9 +17,6 @@ if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
   export PATH=$HOME/bin:$PATH
 fi
 
-# Hamiware ENV
-source ~/.config/hamiware/secrets.env
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
