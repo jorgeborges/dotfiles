@@ -156,7 +156,11 @@ alias thami="tmuxinator hamiware"
 
 # powerline10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+if [[ -n "$CURSOR_AGENT" ]]; then
+  # Skip p10k theme initialization for better Cursor compatibility
+else
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+fi
 
 # p10k custom prompts colors
 typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=7
