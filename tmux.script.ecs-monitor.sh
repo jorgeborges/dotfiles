@@ -25,15 +25,15 @@ fi
 if [ "$task_count" -ge 7 ]; then
     alert_state="ALERT"
     alert_msg=":red_circle: *ALERT!* ECS running task count is *$task_count* (>6) in PulseOwl cluster."
-    echo "#[fg=red]ALERT! PO-ECS > 6"
+    echo "#[fg=red]ALERT! PO-ECS: $task_count > 6"
 elif [ "$task_count" -ge 2 ]; then
     alert_state="OK"
     alert_msg=":white_check_mark: ECS running task count back to normal: $task_count."
-    echo "#[fg=green]PO-ECS "
+    echo "#[fg=green]PO-ECS($task_count) "
 else
     alert_state="WARNING"
     alert_msg=":warning: *WARNING!* ECS running task count is low: $task_count (<2)."
-    echo "#[fg=yellow]WARNING! PO-ECS < 2"
+    echo "#[fg=yellow]WARNING! PO-ECS: $task_count < 2"
 fi
 
 # Read last alert state, if file exists
