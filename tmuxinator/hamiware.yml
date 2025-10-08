@@ -9,59 +9,55 @@ windows:
   - terminal:
       panes:
         - 🧮 terminal:
-          - cd && illg
-  - hamiware-website:
+            - cd && illg
+  - websites:
       layout: even-horizontal
       panes:
         - 🟢 service:
-          - cd ~/repos_hamiware/hamiware-website/ && illg
+            - cd ~/repos_hamiware/pulseowl-website/ && illg
         - 🛠️ commands:
-          - cd ~/repos_hamiware/hamiware-website/ && gst
+            - cd ~/repos_hamiware/pulseowl-website/ && gst
   - pulseowl-monorepo:
-    #layout: a6e0,253x63,0,0{131x63,0,0[131x47,0,0,3,131x15,0,48,14],121x63,132,0[121x15,132,0,7,121x13,132,16,8,121x14,132,30,9,121x18,132,45,10]}
-      layout: 8105,253x63,0,0{131x63,0,0[131x43,0,0,3,131x8,0,44,15,131x10,0,53,7],121x63,132,0[121x15,132,0,8,121x13,132,16,9,121x14,132,30,10,121x18,132,45,11]}
+      layout: 3b53,253x63,0,0{131x63,0,0[131x53,0,0,3,131x9,0,54,8],121x63,132,0[121x15,132,0,10,121x13,132,16,11,121x14,132,30,12,121x18,132,45,13]}
       panes:
         - 🛠️ commands:
-          - cd ~/repos_hamiware/pulseowl/ && illg
+            - cd ~/repos_hamiware/pulseowl/ && illg
         - 🖥️ 🛤️  sst-tunnel:
-          - cd ~/repos_hamiware/pulseowl/
-          - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm sst:tunnel"
-        - 🧬📚 sst-dev-basic:
-          - cd ~/repos_hamiware/pulseowl/
-          - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm sst:dev:basic"
+            - cd ~/repos_hamiware/pulseowl/
+            - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm sst:tunnel"
         - 🌐🖥️  app-local-tunnel:
-          - cd ~/.cloudflared
-          - sleep 3 && tmux send-keys -t "$TMUX_PANE" "cloudflared tunnel --config ~/.cloudflared/pulseowl-frontend.yml run"
+            - cd ~/.cloudflared
+            - sleep 3 && tmux send-keys -t "$TMUX_PANE" "cloudflared tunnel --config ~/.cloudflared/pulseowl-frontend.yml run"
         - 🌐🔌 internal-local-tunnel:
-          - cd ~/.cloudflared
-          - sleep 3 && tmux send-keys -t "$TMUX_PANE" "cloudflared tunnel --config ~/.cloudflared/pulseowl-internal.yml run"
+            - cd ~/.cloudflared
+            - sleep 3 && tmux send-keys -t "$TMUX_PANE" "cloudflared tunnel --config ~/.cloudflared/pulseowl-internal.yml run"
         - 🌐🔗 integrations-local-tunnel:
-          - cd ~/.cloudflared
-          - sleep 3 && tmux send-keys -t "$TMUX_PANE" "cloudflared tunnel --config ~/.cloudflared/pulseowl-integrations.yml run"
+            - cd ~/.cloudflared
+            - sleep 3 && tmux send-keys -t "$TMUX_PANE" "cloudflared tunnel --config ~/.cloudflared/pulseowl-integrations.yml run"
         - 🧩 pulseowl-shared:
-          - cd ~/repos_hamiware/pulseowl/packages/shared
-          - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm run build:watch"
+            - cd ~/repos_hamiware/pulseowl/packages/shared
+            - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm run build:watch"
   - pulseowl-backend:
       #layout: even-horizontal
       layout: 3b34,253x63,0,0{126x63,0,0[126x31,0,0,4,126x31,0,32,11],126x63,127,0,8}
       panes:
         - 🐘 database:
-          - cd ~/repos_hamiware/pulseowl/apps/backend
-          - sleep 3 && tmux send-keys -t "$TMUX_PANE" "docker-compose up"
+            - cd ~/repos_hamiware/pulseowl/apps/backend
+            - sleep 3 && tmux send-keys -t "$TMUX_PANE" "docker-compose up"
         - 🟢 service:
-          - cd ~/repos_hamiware/pulseowl/apps/backend && illg
-          - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm run start:web-server:dev"
+            - cd ~/repos_hamiware/pulseowl/apps/backend && illg
+            - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm run start:web-server:dev"
         - 🛠️ commands:
-          - cd ~/repos_hamiware/pulseowl/apps/backend && gst
+            - cd ~/repos_hamiware/pulseowl/apps/backend && gst
   - pulseowl-frontend:
       layout: even-horizontal
       panes:
         - 🟢 service:
-          - cd ~/repos_hamiware/pulseowl/apps/frontend && illg
-          - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm run dev"
+            - cd ~/repos_hamiware/pulseowl/apps/frontend && illg
+            - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm run dev"
         - 🛠️ commands:
-          - cd ~/repos_hamiware/pulseowl/apps/frontend && gst
+            - cd ~/repos_hamiware/pulseowl/apps/frontend && gst
   - pulseowl-integration-aws:
       panes:
         - 🛠️ commands:
-          - cd ~/repos_hamiware/pulseowl/apps/integration-aws && gst
+            - cd ~/repos_hamiware/pulseowl/apps/integration-aws && gst
