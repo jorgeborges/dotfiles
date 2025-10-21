@@ -3,3 +3,6 @@
 # config files
 config/*.yml
 !config/*.sample.yml
+
+# tmp files
+tmp/**
