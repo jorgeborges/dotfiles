@@ -70,11 +70,20 @@ else
     tmux_output="#[fg=yellow]WARNING! PO-ECS: $task_count < 2"
 fi
 
-# Read last alert state, if file exists
-last_state=""
-if [ -f "$STATE_FILE" ]; then
-    last_state=$(cat "$STATE_FILE")
+# --- State Management and Notification ---
+
+# On the very first run, the state file won't exist.
+# In this case, we create it and exit to prevent a false positive alert.
+if [ ! -f "$STATE_FILE" ]; then
+    echo "$alert_state" > "$STATE_FILE"
+    echo "$current_time" > "$LAST_RUN_FILE"
+    echo "$tmux_output" > "$LAST_OUTPUT_FILE"
+    echo "$tmux_output"
+    exit 0
 fi
+
+# Read last alert state
+last_state=$(cat "$STATE_FILE")
 
 # Send to Slack *only if state has changed*
 if [ "$alert_state" != "$last_state" ]; then
