@@ -3,6 +3,8 @@
 # --- Configuration ---
 # The script will only perform a full check once per this interval (in seconds)
 EXECUTION_INTERVAL=300
+TASK_COUNT_ALERT_THRESHOLD=8
+TASK_COUNT_OK_THRESHOLD=2
 
 # Determine the script's directory to build a path to the project's tmp/ folder.
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
@@ -56,18 +58,18 @@ if ! [[ "$task_count" =~ ^[0-9]+$ ]]; then
 fi
 
 # Decide alert state and messages
-if [ "$task_count" -ge 7 ]; then
+if [ "$task_count" -ge "$TASK_COUNT_ALERT_THRESHOLD" ]; then
     alert_state="ALERT"
-    alert_msg=":red_circle: *ALERT!* ECS running task count is *$task_count* (>6) in PulseOwl cluster."
-    tmux_output="#[fg=red]ALERT! PO-ECS: $task_count > 6"
-elif [ "$task_count" -ge 2 ]; then
+    alert_msg=":red_circle: *ALERT!* ECS running task count is *$task_count* (>=$TASK_COUNT_ALERT_THRESHOLD) in PulseOwl cluster."
+    tmux_output="#[fg=red]ALERT! PO-ECS: $task_count >= $TASK_COUNT_ALERT_THRESHOLD"
+elif [ "$task_count" -ge "$TASK_COUNT_OK_THRESHOLD" ]; then
     alert_state="OK"
-    alert_msg=":white_check_mark: ECS running task count back to normal: $task_count."
+    alert_msg=":white_check_mark: ECS running task count back to normal: $task_count (>=$TASK_COUNT_OK_THRESHOLD)."
     tmux_output="#[fg=green]PO-ECS($task_count) "
 else
     alert_state="WARNING"
-    alert_msg=":warning: *WARNING!* ECS running task count is low: $task_count (<2)."
-    tmux_output="#[fg=yellow]WARNING! PO-ECS: $task_count < 2"
+    alert_msg=":warning: *WARNING!* ECS running task count is low: $task_count (< $TASK_COUNT_OK_THRESHOLD)."
+    tmux_output="#[fg=yellow]WARNING! PO-ECS: $task_count < $TASK_COUNT_OK_THRESHOLD"
 fi
 
 # --- State Management and Notification ---
