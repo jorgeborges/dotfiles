@@ -2,7 +2,7 @@
 
 # --- Configuration ---
 # The script will only perform a full check once per this interval (in seconds)
-EXECUTION_INTERVAL=300
+EXECUTION_INTERVAL_SECONDS=300
 TASK_COUNT_ALERT_THRESHOLD=8
 TASK_COUNT_OK_THRESHOLD=2
 
@@ -28,7 +28,7 @@ fi
 time_since_last_run=$((current_time - last_run_time))
 
 # If the interval has not passed and we have a cached output, show it and exit.
-if [ "$time_since_last_run" -lt "$EXECUTION_INTERVAL" ] && [ -f "$LAST_OUTPUT_FILE" ]; then
+if [ "$time_since_last_run" -lt "$EXECUTION_INTERVAL_SECONDS" ] && [ -f "$LAST_OUTPUT_FILE" ]; then
     cat "$LAST_OUTPUT_FILE"
     exit 0
 fi
