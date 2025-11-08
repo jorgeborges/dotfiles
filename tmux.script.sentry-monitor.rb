@@ -4,6 +4,7 @@ require 'rest-client'
 require 'json'
 require 'yaml'
 require 'fileutils'
+require 'uri'
 
 # --- Configuration ---
 CONFIG = YAML.load_file(File.join(__dir__, 'config/sentry.yml'))
@@ -29,9 +30,9 @@ def save_seen_group_ids(ids)
 end
 
 # --- Slack Notification ---
-def send_slack_notification(project_slug, event)
-  group_id = event['groupID']
-  title = event['title']
+def send_slack_notification(project_slug, issue)
+  group_id = issue['id']
+  title = issue['title']
   issue_url = "https://#{ORG_SLUG}.sentry.io/issues/#{group_id}/"
 
   message = {
@@ -49,19 +50,20 @@ begin
   current_run_group_ids = []
 
   PROJECTS.each do |project_slug|
-    url = "#{SENTRY_API_BASE_URL}/#{ORG_SLUG}/#{project_slug}/events/?statsPeriod=60m"
+    query = 'is:unresolved !issue.category:performance'
+    url = "#{SENTRY_API_BASE_URL}/#{ORG_SLUG}/#{project_slug}/issues/?query=#{URI.encode_www_form_component(query)}"
     headers = { Authorization: "Bearer #{TOKEN}" }
 
     begin
       response = RestClient.get(url, headers)
-      events = JSON.parse(response.body)
+      issues = JSON.parse(response.body)
 
-      events.each do |event|
-        group_id = event['groupID']
+      issues.each do |issue|
+        group_id = issue['id']
         current_run_group_ids << group_id
 
         unless seen_group_ids.include?(group_id)
-          send_slack_notification(project_slug, event)
+          send_slack_notification(project_slug, issue)
           seen_group_ids << group_id
         end
       end
