@@ -46,7 +46,7 @@ end
 # --- Main Logic ---
 begin
   seen_group_ids = load_seen_group_ids
-  new_issues_found = 0
+  current_run_group_ids = []
 
   PROJECTS.each do |project_slug|
     url = "#{SENTRY_API_BASE_URL}/#{ORG_SLUG}/#{project_slug}/events/?statsPeriod=60m"
@@ -58,10 +58,11 @@ begin
 
       events.each do |event|
         group_id = event['groupID']
+        current_run_group_ids << group_id
+
         unless seen_group_ids.include?(group_id)
           send_slack_notification(project_slug, event)
           seen_group_ids << group_id
-          new_issues_found += 1
         end
       end
     rescue RestClient::ExceptionWithResponse => e
@@ -73,8 +74,10 @@ begin
   save_seen_group_ids(seen_group_ids)
 
   # --- Output ---
-  if new_issues_found > 0
-    puts "#[fg=red]PO-Sentry: #{new_issues_found} new!#[fg=default]"
+  active_issue_count = current_run_group_ids.uniq.length
+
+  if active_issue_count > 0
+    puts "#[fg=red]PO-Sentry: #{active_issue_count} open!#[fg=default]"
   else
     puts "PO-Sentry: OK"
   end
