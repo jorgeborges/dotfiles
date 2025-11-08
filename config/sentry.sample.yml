@@ -1,0 +1,6 @@
+personal_access_token: "sntryu_your-sentry-token"
+organization_slug: "your-org-slug"
+slack_webhook_url: "https://hooks.slack.com/services/..."
+projects:
+  - "project-slug-1"
+  - "project-slug-2"
