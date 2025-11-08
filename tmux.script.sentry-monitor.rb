@@ -97,7 +97,7 @@ begin
   tmux_output = if active_issue_count > 0
                   "#[fg=red]PO-Sentry: #{active_issue_count} open!#[fg=default]"
                 else
-                  "PO-Sentry: OK"
+                  "#[fg=green]PO-Sentry "
                 end
   puts tmux_output
 
