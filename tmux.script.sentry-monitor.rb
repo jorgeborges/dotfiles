@@ -15,7 +15,7 @@ SLACK_WEBHOOK_URL = CONFIG['slack_webhook_url']
 SENTRY_API_BASE_URL = "https://sentry.io/api/0/projects"
 
 # --- Caching & Rate Limiting ---
-EXECUTION_INTERVAL_SECONDS = 300 # 5 minutes
+EXECUTION_INTERVAL_SECONDS = 150 # 2.5 minutes
 TMP_DIR = File.join(__dir__, 'tmp')
 STATE_FILE = File.join(TMP_DIR, 'sentry_monitor.state')
 LAST_RUN_FILE = File.join(TMP_DIR, 'sentry_monitor.lastrun')
