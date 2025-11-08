@@ -74,11 +74,11 @@ begin
 
   # --- Output ---
   if new_issues_found > 0
-    puts "#[fg=red]Sentry: #{new_issues_found} new!#[fg=default]"
+    puts "#[fg=red]PO-Sentry: #{new_issues_found} new!#[fg=default]"
   else
-    puts "Sentry: OK"
+    puts "PO-Sentry: OK"
   end
 
 rescue => e
-  puts "#[fg=red]Sentry: Error#[fg=default]"
+  puts "#[fg=red]PO-Sentry: Error#[fg=default]"
 end
