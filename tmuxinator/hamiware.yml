@@ -17,7 +17,7 @@ windows:
             - cd ~/repos_hamiware/pulseowl-website/ && illg
         - 🛠️ commands:
             - cd ~/repos_hamiware/pulseowl-website/ && gst
-  - pulseowl-monorepo:
+  - po-monorepo:
       layout: 3b53,253x63,0,0{131x63,0,0[131x53,0,0,3,131x9,0,54,8],121x63,132,0[121x15,132,0,10,121x13,132,16,11,121x14,132,30,12,121x18,132,45,13]}
       panes:
         - 🛠️ commands:
@@ -37,8 +37,7 @@ windows:
         - 🧩 pulseowl-shared:
             - cd ~/repos_hamiware/pulseowl/packages/shared
             - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm run build:watch"
-  - pulseowl-backend:
-      #layout: even-horizontal
+  - po-backend:
       layout: 3b34,253x63,0,0{126x63,0,0[126x31,0,0,4,126x31,0,32,11],126x63,127,0,8}
       panes:
         - 🐘 database:
@@ -49,7 +48,7 @@ windows:
             - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm run start:web-server:dev"
         - 🛠️ commands:
             - cd ~/repos_hamiware/pulseowl/apps/backend && gst
-  - pulseowl-frontend:
+  - po-frontend:
       layout: even-horizontal
       panes:
         - 🟢 service:
@@ -57,7 +56,11 @@ windows:
             - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm run dev"
         - 🛠️ commands:
             - cd ~/repos_hamiware/pulseowl/apps/frontend && gst
-  - pulseowl-integration-aws:
+  - po-integration-aws:
       panes:
         - 🛠️ commands:
             - cd ~/repos_hamiware/pulseowl/apps/integration-aws && gst
+  - po-github-actions:
+      panes:
+        - 🛠️ commands:
+            - cd ~/repos_hamiware/pulseowl-github-actions && gst
