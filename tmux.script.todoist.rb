@@ -11,7 +11,7 @@ require 'yaml'
 config = YAML.load_file(__dir__ + '/config/todoist.yml')
 
 begin
-  response = RestClient.get 'https://api.todoist.com/rest/v2/tasks', {:Authorization => 'Bearer ' + config['api_token']}
+  response = RestClient.get 'https://api.todoist.com/api/v1/tasks?limit=200', {:Authorization => 'Bearer ' + config['api_token']}
 rescue
   if ARGV[0] == 'overdue'
     puts 'task_display()'
@@ -21,11 +21,11 @@ rescue
   Kernel.abort
 end
 
-todoist = JSON.parse response
+todoist = JSON.parse(response)['results']
 
 overdue = today = future = icebox = 0
 todoist.each do |item|
-  next if item['is_completed']
+  next if item['checked'] || item['is_deleted']
 
   if item['due'].nil?
     icebox += 1
