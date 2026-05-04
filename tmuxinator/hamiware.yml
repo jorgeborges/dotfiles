@@ -36,7 +36,7 @@ windows:
             - sleep 3 && tmux send-keys -t "$TMUX_PANE" "cloudflared tunnel --config ~/.cloudflared/pulseowl-integrations.yml run"
         - 🧩 pulseowl-shared:
             - cd ~/repos_hamiware/pulseowl/packages/shared
-            - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm run build:watch"
+            - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm exec tsc --watch"
   - po-backend:
       layout: 3b34,253x63,0,0{126x63,0,0[126x31,0,0,4,126x31,0,32,11],126x63,127,0,8}
       panes:
@@ -45,7 +45,7 @@ windows:
             - sleep 3 && tmux send-keys -t "$TMUX_PANE" "docker-compose up"
         - 🟢 service:
             - cd ~/repos_hamiware/pulseowl/apps/backend && illg
-            - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm run start:web-server:dev"
+            - sleep 3 && tmux send-keys -t "$TMUX_PANE" "ENV=dev pnpm exec nest start --watch"
         - 🛠️ commands:
             - cd ~/repos_hamiware/pulseowl/apps/backend && gst
   - po-frontend:
@@ -53,7 +53,7 @@ windows:
       panes:
         - 🟢 service:
             - cd ~/repos_hamiware/pulseowl/apps/frontend && illg
-            - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm run dev"
+            - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm exec next dev --turbopack"
         - 🛠️ commands:
             - cd ~/repos_hamiware/pulseowl/apps/frontend && gst
   - po-integration-aws:
