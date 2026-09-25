@@ -6,7 +6,7 @@
 HEALTH_REMINDERS = [
   [7, '🌞 Morning!'],         # 7 AM
   [9, '🌞💧 Drink Water'],    # 9 AM
-  [10, '🌞🧘🏾 Stretch'],       # 10 AM
+  [10, '🌞🧘 Stretch'],       # 10 AM
   [11, '💧 Drink Water'],     # 11 AM
   [12, '🍽️  Lunch Time'],     # 12 PM
   [14, '🥤 Energy Drink'],    # 2 PM
