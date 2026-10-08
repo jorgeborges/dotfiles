@@ -49,7 +49,7 @@ windows:
         - 🛠️ commands:
             - cd ~/repos_hamiware/pulseowl/apps/backend && gst
   - po-frontend:
-      layout: even-horizontal
+      layout: 606f,253x63,0,0{101x63,0,0,5,151x63,102,0,17}
       panes:
         - 🟢 service:
             - cd ~/repos_hamiware/pulseowl/apps/frontend && illg
