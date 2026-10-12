@@ -18,7 +18,7 @@ windows:
         - 🛠️ commands:
             - cd ~/repos_hamiware/pulseowl-website/ && gst
   - po-monorepo:
-      layout: 3b53,253x63,0,0{131x63,0,0[131x53,0,0,3,131x9,0,54,8],121x63,132,0[121x15,132,0,10,121x13,132,16,11,121x14,132,30,12,121x18,132,45,13]}
+      layout: a4dc,253x63,0,0{131x63,0,0[131x53,0,0,3,131x9,0,54,9],121x63,132,0[121x15,132,0,10,121x13,132,16,11,121x12,132,30,12,121x11,132,43,19,121x8,132,55,13]}
       panes:
         - 🛠️ commands:
             - cd ~/repos_hamiware/pulseowl/ && illg
@@ -34,6 +34,9 @@ windows:
         - 🌐🔗 integrations-local-tunnel:
             - cd ~/.cloudflared
             - sleep 3 && tmux send-keys -t "$TMUX_PANE" "cloudflared tunnel --config ~/.cloudflared/pulseowl-integrations.yml run"
+        - 🤖🔗 mcp-local-tunnel:
+            - cd ~/.cloudflared
+            - sleep 3 && tmux send-keys -t "$TMUX_PANE" "cloudflared tunnel --config ~/.cloudflared/pulseowl-mcp.yml run"
         - 🧩 pulseowl-shared:
             - cd ~/repos_hamiware/pulseowl/packages/shared
             - sleep 3 && tmux send-keys -t "$TMUX_PANE" "pnpm exec tsc --watch"
